@@ -16,13 +16,21 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden lg:flex lg:gap-x-12">
-          <a href="#" className="text-sm font-semibold text-white">Home</a>
-          <a href="#" className="text-sm font-semibold text-white">Spot</a>
-          <a href="#" className="text-sm font-semibold text-white">Profile</a>
+          <a href="#" className="text-sm font-semibold text-white">
+            Home
+          </a>
+          <a href="#" className="text-sm font-semibold text-white">
+            PondZone
+          </a>
+          <a href="#" className="text-sm font-semibold text-white">
+            Profile
+          </a>
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold text-white">Log in →</a>
+          <a href="#" className="text-sm font-semibold text-white">
+            Log in →
+          </a>
         </div>
 
         {/* Hamburger icon */}
@@ -32,7 +40,11 @@ export default function Navbar() {
             className="-m-2.5 p-2.5 text-gray-700"
           >
             <svg className="size-6" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M3 12h18M3 18h18" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 6h18M3 12h18M3 18h18"
+              />
             </svg>
           </button>
         </div>
