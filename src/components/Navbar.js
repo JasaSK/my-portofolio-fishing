@@ -16,13 +16,22 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden lg:flex lg:gap-x-12">
-          <a href="#" className="text-sm font-semibold text-white">
+          <a
+            href="/Home"
+            className="text-sm font-semibold text-white hover:text-white/70"
+          >
             Home
           </a>
-          <a href="#" className="text-sm font-semibold text-white">
+          <a
+            href="/PondZone"
+            className="text-sm font-semibold text-white hover:text-white/70"
+          >
             PondZone
           </a>
-          <a href="#" className="text-sm font-semibold text-white">
+          <a
+            href="#"
+            className="text-sm font-semibold text-white hover:text-white/70"
+          >
             Profile
           </a>
         </div>
