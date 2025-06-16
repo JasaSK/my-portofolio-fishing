@@ -1,12 +1,12 @@
 import Navbar from "../../components/Navbar.js";
-import {Background1} from "../../components/background.js";
+import { Background1 } from "../../components/background.js";
 import { Product1 } from "../../components/Product.js";
 
 export default function PondZone() {
   return (
     <>
       <main className="relative min-h-screen text-orange">
-      <Background1 />
+        <Background1 />
         <Navbar />
         <div className="bg-none py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -32,7 +32,7 @@ export default function PondZone() {
                         className="size-6 text-white"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth={1.5}
                         stroke="currentColor"
                         aria-hidden="true"
                         data-slot="icon"
@@ -58,7 +58,7 @@ export default function PondZone() {
                         className="size-6 text-white"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth={1.5}
                         stroke="currentColor"
                         aria-hidden="true"
                         data-slot="icon"
@@ -84,7 +84,7 @@ export default function PondZone() {
                         className="size-6 text-white"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth={1.5}
                         stroke="currentColor"
                         aria-hidden="true"
                         data-slot="icon"
@@ -110,7 +110,7 @@ export default function PondZone() {
                         className="size-6 text-white"
                         fill="none"
                         viewBox="0 0 24 24"
-                        strokeWidth="1.5"
+                        strokeWidth={1.5}
                         stroke="currentColor"
                         aria-hidden="true"
                         data-slot="icon"
@@ -134,9 +134,8 @@ export default function PondZone() {
             </div>
           </div>
         </div>
-
       </main>
-        <Product1 />
+      <Product1 />
     </>
   );
 }
