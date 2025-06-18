@@ -1,5 +1,5 @@
 import Navbar from "../../components/Navbar.js";
-import {Background1} from "../../components/background.js";
+import Background from "../../components/background.js";
 import Produk from "../../components/Product.js";
 import Gird from "../../components/Grid.js";
 import Footer from "../../components/Footer.js";
@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <main className="relative min-h-screen">
-        <Background1/>
+        <Background />
         <Navbar />
         <section className="relative isolate px-6 pt-14 lg:px-8">
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">

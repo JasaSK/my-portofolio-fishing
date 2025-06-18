@@ -7,7 +7,7 @@ export default function Background() {
       <div
         className="w-full h-full bg-center bg-cover"
         style={{
-          backgroundImage: "url('/images/background.jpg')",
+          backgroundImage: "url('/images/background2.jpg')",
         }}
       />
       <div
@@ -27,14 +27,14 @@ export function Background1() {
       <div
         className="w-full h-full bg-center bg-cover"
         style={{
-          backgroundImage: "url('/images/background1.jpg')",
+          backgroundImage: "url('/images/background.jpg')",
         }}
       />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.6) 100%)",
+            "radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.6) 70%, rgba(0, 0, 0, 0.85) 100%)",
         }}
       />
     </div>
