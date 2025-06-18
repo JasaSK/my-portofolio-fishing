@@ -27,7 +27,7 @@ export function Background1() {
       <div
         className="w-full h-full bg-center bg-cover"
         style={{
-          backgroundImage: "url('/images/background2.jpg')",
+          backgroundImage: "url('/images/background1.jpg')",
         }}
       />
       <div
