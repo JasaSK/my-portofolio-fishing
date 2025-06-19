@@ -1,5 +1,5 @@
 import Navbar from "../../components/Navbar.js";
-import { Background1 } from "../../components/background.js";
+import { Background1 } from "../../components/Background.js";
 import { Product1 } from "../../components/Product.js";
 
 export default function PondZone() {

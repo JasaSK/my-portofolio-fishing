@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import FadeInSection from "./FadeInSection.js";
 
 export default function Product() {
   return (
@@ -17,167 +18,183 @@ export default function Product() {
           </a>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          <div className="group relative">
-            <Image
-              src="/images/background.jpg"
-              alt="Basic Tee in black"
-              width={500}
-              height={500}
-              className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
-            />
-            <div className="mt-4 flex justify-between">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <a href="#" className="relative z-10">
-                    Basic Tee
-                  </a>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">Black</p>
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 animate-fadeInUp">
+          <FadeInSection>
+            <div className="group relative">
+              <Image
+                src="/images/background.jpg"
+                alt="Basic Tee in black"
+                width={500}
+                height={500}
+                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
+              />
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href="#" className="relative z-10">
+                      Basic Tee
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">Black</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">$35</p>
               </div>
-              <p className="text-sm font-medium text-gray-900">$35</p>
             </div>
-          </div>
-          <div className="group relative">
-            <Image
-              src="/images/background.jpg"
-              alt="Basic Tee in black"
-              width={500}
-              height={500}
-              className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
-            />
-            <div className="mt-4 flex justify-between">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <a href="#" className="relative z-10">
-                    Basic Tee
-                  </a>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">Black</p>
+          </FadeInSection>
+          <FadeInSection>
+            <div className="group relative">
+              <Image
+                src="/images/background.jpg"
+                alt="Basic Tee in black"
+                width={500}
+                height={500}
+                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
+              />
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href="#" className="relative z-10">
+                      Basic Tee
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">Black</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">$35</p>
               </div>
-              <p className="text-sm font-medium text-gray-900">$35</p>
             </div>
-          </div>
-          <div className="group relative">
-            <Image
-              src="/images/background.jpg"
-              alt="Basic Tee in black"
-              width={500}
-              height={500}
-              className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
-            />
-            <div className="mt-4 flex justify-between">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <a href="#" className="relative z-10">
-                    Basic Tee
-                  </a>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">Black</p>
+          </FadeInSection>
+          <FadeInSection>
+            <div className="group relative">
+              <Image
+                src="/images/background.jpg"
+                alt="Basic Tee in black"
+                width={500}
+                height={500}
+                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
+              />
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href="#" className="relative z-10">
+                      Basic Tee
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">Black</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">$35</p>
               </div>
-              <p className="text-sm font-medium text-gray-900">$35</p>
             </div>
-          </div>
-          <div className="group relative">
-            <Image
-              src="/images/background.jpg"
-              alt="Basic Tee in black"
-              width={500}
-              height={500}
-              className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
-            />
-            <div className="mt-4 flex justify-between">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <a href="#" className="relative z-10">
-                    Basic Tee
-                  </a>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">Black</p>
+          </FadeInSection>
+          <FadeInSection>
+            <div className="group relative">
+              <Image
+                src="/images/background.jpg"
+                alt="Basic Tee in black"
+                width={500}
+                height={500}
+                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
+              />
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href="#" className="relative z-10">
+                      Basic Tee
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">Black</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">$35</p>
               </div>
-              <p className="text-sm font-medium text-gray-900">$35</p>
             </div>
-          </div>
-          <div className="group relative">
-            <Image
-              src="/images/background.jpg"
-              alt="Basic Tee in black"
-              width={500}
-              height={500}
-              className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
-            />
-            <div className="mt-4 flex justify-between">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <a href="#" className="relative z-10">
-                    Basic Tee
-                  </a>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">Black</p>
+          </FadeInSection>
+          <FadeInSection>
+            <div className="group relative">
+              <Image
+                src="/images/background.jpg"
+                alt="Basic Tee in black"
+                width={500}
+                height={500}
+                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
+              />
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href="#" className="relative z-10">
+                      Basic Tee
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">Black</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">$35</p>
               </div>
-              <p className="text-sm font-medium text-gray-900">$35</p>
             </div>
-          </div>
-          <div className="group relative">
-            <Image
-              src="/images/background.jpg"
-              alt="Basic Tee in black"
-              width={500}
-              height={500}
-              className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
-            />
-            <div className="mt-4 flex justify-between">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <a href="#" className="relative z-10">
-                    Basic Tee
-                  </a>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">Black</p>
+          </FadeInSection>
+          <FadeInSection>
+            <div className="group relative">
+              <Image
+                src="/images/background.jpg"
+                alt="Basic Tee in black"
+                width={500}
+                height={500}
+                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
+              />
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href="#" className="relative z-10">
+                      Basic Tee
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">Black</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">$35</p>
               </div>
-              <p className="text-sm font-medium text-gray-900">$35</p>
             </div>
-          </div>
-          <div className="group relative">
-            <Image
-              src="/images/background.jpg"
-              alt="Basic Tee in black"
-              width={500}
-              height={500}
-              className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
-            />
-            <div className="mt-4 flex justify-between">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <a href="#" className="relative z-10">
-                    Basic Tee
-                  </a>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">Black</p>
+          </FadeInSection>
+          <FadeInSection>
+            <div className="group relative">
+              <Image
+                src="/images/background.jpg"
+                alt="Basic Tee in black"
+                width={500}
+                height={500}
+                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
+              />
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href="#" className="relative z-10">
+                      Basic Tee
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">Black</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">$35</p>
               </div>
-              <p className="text-sm font-medium text-gray-900">$35</p>
             </div>
-          </div>
-          <div className="group relative">
-            <Image
-              src="/images/background.jpg"
-              alt="Basic Tee in black"
-              width={500}
-              height={500}
-              className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
-            />
-            <div className="mt-4 flex justify-between">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <a href="#" className="relative z-10">
-                    Basic Tee
-                  </a>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">Black</p>
+          </FadeInSection>
+          <FadeInSection>
+            <div className="group relative">
+              <Image
+                src="/images/background.jpg"
+                alt="Basic Tee in black"
+                width={500}
+                height={500}
+                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:h-80"
+              />
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href="#" className="relative z-10">
+                      Basic Tee
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">Black</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">$35</p>
               </div>
-              <p className="text-sm font-medium text-gray-900">$35</p>
             </div>
-          </div>
+          </FadeInSection>
         </div>
       </div>
     </div>

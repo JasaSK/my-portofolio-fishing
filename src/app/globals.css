@@ -40,7 +40,7 @@ body {
     }
   }
   .animate-fadeIn {
-    animation: fadeIn 1s ease-in forwards;
+    animation: fadeIn .5s ease-in forwards;
   }
 
   /* Fade In Up */
@@ -55,7 +55,7 @@ body {
     }
   }
   .animate-fadeInUp {
-    animation: fadeInUp 1s ease-out forwards;
+    animation: fadeInUp .5s ease-out forwards;
   }
 
   /* Fade In Down */
@@ -70,7 +70,7 @@ body {
     }
   }
   .animate-fadeInDown {
-    animation: fadeInDown 1s ease-out forwards;
+    animation: fadeInDown .5s ease-out forwards;
   }
 
   /* Fade In Left */
@@ -85,7 +85,7 @@ body {
     }
   }
   .animate-fadeInLeft {
-    animation: fadeInLeft 1s ease-out forwards;
+    animation: fadeInLeft .5s ease-out forwards;
   }
 
   /* Fade In Right */
@@ -100,7 +100,7 @@ body {
     }
   }
   .animate-fadeInRight {
-    animation: fadeInRight 1s ease-out forwards;
+    animation: fadeInRight .5s ease-out forwards;
   }
 
   /* Scale In */
@@ -130,6 +130,6 @@ body {
     }
   }
   .animate-rotateIn {
-    animation: rotateIn 1s ease-out forwards;
+    animation: rotateIn .5s ease-out forwards;
   }
 }
