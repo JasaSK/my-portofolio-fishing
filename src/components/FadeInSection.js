@@ -23,6 +23,12 @@ export default function FadeInSection({ children, direction = "up" }) {
   // Tentukan class animasi
   let animationClass = "";
   switch (direction) {
+    case "in":
+      animationClass = "animate-fadeIn";
+      break;
+    case "left":
+      animationClass = "animate-fadeInLeft";
+      break;
     case "left":
       animationClass = "animate-fadeInLeft";
       break;
@@ -40,7 +46,7 @@ export default function FadeInSection({ children, direction = "up" }) {
   return (
     <div
       ref={ref}
-      className={`transition-opacity duration-500 ease-in-out ${
+      className={`transition-opacity duration-700 ease-in-out ${
         isVisible ? `opacity-100 ${animationClass}` : "opacity-0"
       }`}
     >
