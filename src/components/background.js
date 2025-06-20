@@ -22,7 +22,7 @@ export default function Background() {
 
 export function Background1() {
   return (
-    <div className="absolute inset-0 -z-10">
+    <div className="absolute inset-0 -z-10 animate-fadeIn">
       <div
         className="w-full h-full bg-center bg-cover"
         style={{
