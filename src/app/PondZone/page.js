@@ -1,6 +1,7 @@
 import Navbar from "../../components/Navbar.js";
 import { Background1 } from "../../components/Background.js";
 import { Product1 } from "../../components/Product.js";
+import Footer from "../../components/Footer.js";
 
 export default function PondZone() {
   return (
@@ -136,6 +137,7 @@ export default function PondZone() {
         </div>
       </main>
       <Product1 />
+      <Footer />
     </>
   );
 }
