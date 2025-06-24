@@ -81,36 +81,36 @@ export default function Login() {
             Sign In
           </button>
 
-//           <p className="text-sm text-gray-900">
-//             Not registered yet?{" "}
-//             <a href="#" className="font-bold text-gray-700 hover:text-gray-900">
-//               Create an Account
-//             </a>
-//           </p>
-//         </form>
+          <p className="text-sm text-gray-900">
+            Not registered yet?{" "}
+            <a href="#" className="font-bold text-gray-700 hover:text-gray-900">
+              Create an Account
+            </a>
+          </p>
+        </form>
 
-//         <p className="text-sm text-slate-500 py-5 text-center">
-//           Tailwind CSS Component from{" "}
-//           <a
-//             href="https://www.loopple.com/theme/motion-landing-library?ref=tailwindcomponents"
-//             className="text-slate-700 hover:text-slate-900"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             Motion Landing Library
-//           </a>{" "}
-//           by{" "}
-//           <a
-//             href="https://www.loopple.com"
-//             className="text-slate-700 hover:text-slate-900"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             Loopple Builder
-//           </a>
-//           .
-//         </p>
-//       </div>
-//     </main>
-//   );
-// }
+        <p className="text-sm text-slate-500 py-5 text-center">
+          Tailwind CSS Component from{" "}
+          <a
+            href="https://www.loopple.com/theme/motion-landing-library?ref=tailwindcomponents"
+            className="text-slate-700 hover:text-slate-900"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Motion Landing Library
+          </a>{" "}
+          by{" "}
+          <a
+            href="https://www.loopple.com"
+            className="text-slate-700 hover:text-slate-900"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Loopple Builder
+          </a>
+          .
+        </p>
+      </div>
+    </main>
+  );
+}
