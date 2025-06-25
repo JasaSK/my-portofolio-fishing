@@ -4,7 +4,7 @@ export default function Login() {
   return (
     <main className="bg-white rounded-lg py-10 px-6 max-w-4xl mx-auto my-10">
       <div className="flex flex-col items-center">
-        <form action={"/home"} className="w-full max-w-md bg-white p-8 rounded-3xl  text-center">
+        <form action={"/auth/login"} className="w-full max-w-md bg-white p-8 rounded-3xl  text-center">
           <h3 className="mb-4 text-4xl font-extrabold text-gray-900">
             Sign In
           </h3>
@@ -42,6 +42,34 @@ export default function Login() {
             />
           </div>
 
+          <div className="mb-6 text-start">
+            <label
+              htmlFor="password"
+              className="mb-2 block text-sm text-gray-900"
+            >
+              Password*
+            </label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              className="w-full px-5 py-4 text-sm font-medium bg-gray-200 text-gray-900 rounded-2xl placeholder:text-gray-700 outline-none focus:bg-gray-300 transition"
+            />
+          </div>
+          <div className="mb-6 text-start">
+            <label
+              htmlFor="password"
+              className="mb-2 block text-sm text-gray-900"
+            >
+              Password*
+            </label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              className="w-full px-5 py-4 text-sm font-medium bg-gray-200 text-gray-900 rounded-2xl placeholder:text-gray-700 outline-none focus:bg-gray-300 transition"
+            />
+          </div>
           <div className="mb-6 text-start">
             <label
               htmlFor="password"

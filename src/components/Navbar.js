@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <header className="absolute inset-x-0 top-0 z-50 text-white">
       <nav className="flex items-center justify-between p-6 lg:px-8">
-        <div className="flex lg:flex-1 animate-fadeIn">
+        <div className="flex lg:flex-1 ">
           <a href="#" className="-m-1.5 p-1.5">
             <h1 className="font-bold">Pemancingan</h1>
           </a>
@@ -16,9 +16,9 @@ export default function Navbar() {
         
 
         {/* Desktop nav */}
-        <div className="hidden lg:flex lg:gap-x-12 animate-fadeIn">
+        <div className="hidden lg:flex lg:gap-x-12 ">
           <a
-            href="/Home"
+            href="/home"
             className="text-sm font-semibold  hover:text-white/70"
           >
             Home
@@ -37,7 +37,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end animate-fadeIn">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end ">
           <a href="#" className="text-sm font-semibold ">
             Log in →
           </a>

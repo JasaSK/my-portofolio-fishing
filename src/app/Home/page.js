@@ -1,8 +1,7 @@
-import Navbar from "../../components/Navbar.js";
+// import Navbar from "../../components/Navbar.js";
 import Background from "../../components/Background.js";
 import Produk from "../../components/Product.js";
 import Gird from "../../components/Grid.js";
-import Footer from "../../components/Footer.js";
 import FadeInSection from "../../components/FadeInSection.js";
 
 export default function Home() {
@@ -10,7 +9,6 @@ export default function Home() {
     <>
       <main className="relative min-h-screen">
         <Background />
-        <Navbar />
         <section className="relative isolate px-6 pt-14 lg:px-8">
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
             <FadeInSection direction="in">
@@ -60,7 +58,6 @@ export default function Home() {
       <Produk />
       <Gird />
       </section>
-      <Footer />
     </>
   );
 }

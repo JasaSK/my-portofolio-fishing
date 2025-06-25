@@ -1,7 +1,5 @@
-import Navbar from "../../components/Navbar.js";
 import { Background1 } from "../../components/Background.js";
 import { Product1 } from "../../components/Product.js";
-import Footer from "../../components/Footer.js";
 import FadeInSection from "../../components/FadeInSection.js";
 
 export default function PondZone() {
@@ -9,7 +7,6 @@ export default function PondZone() {
     <>
       <main className="relative min-h-screen text-orange">
         <Background1 />
-        <Navbar />
         <div className="bg-none py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl lg:text-center">
@@ -165,7 +162,6 @@ export default function PondZone() {
         </div>
       </main>
       <Product1 />
-      <Footer />
     </>
   );
 }
