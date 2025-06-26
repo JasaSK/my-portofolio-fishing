@@ -1,15 +1,19 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function MobileMenu({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
     <>
-      <div className="fixed inset-0 z-40 bg-black bg-opacity-50" onClick={onClose}></div>
+      <div
+        className="fixed inset-0 z-40 bg-black bg-opacity-50"
+        onClick={onClose}
+      ></div>
       <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto bg-white p-6">
         <div className="flex items-center justify-between">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <Image
               className="h-8 w-auto"
               src="/images/Screenshot 2025-03-08 011652.png"
@@ -17,7 +21,7 @@ export default function MobileMenu({ isOpen, onClose }) {
               width={500}
               height={600}
             />
-          </a>
+          </Link>
           <button
             onClick={onClose}
             className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -42,23 +46,27 @@ export default function MobileMenu({ isOpen, onClose }) {
         <div className="mt-6 flow-root">
           <div className="-my-6 divide-y divide-gray-500/10">
             <div className="space-y-2 py-6">
-              {["Product", "Features", "Marketplace", "Company"].map((item) => (
-                <a
-                  key={item}
-                  href="#"
+              {[
+                { name: "Home", href: "/main/home" },
+                { name: "PondZone", href: "/main/PondZone" },
+                { name: "Profile", href: "/main/profile" },
+              ].map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
                 >
-                  {item}
-                </a>
+                  {item.name}
+                </Link>
               ))}
             </div>
             <div className="py-6">
-              <a
-                href="#"
+              <Link
+                href="/login"
                 className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
               >
                 Log in
-              </a>
+              </Link>
             </div>
           </div>
         </div>
