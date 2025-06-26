@@ -72,7 +72,7 @@ export default function Register() {
               className="w-full px-5 py-4 text-sm font-medium bg-gray-200 text-gray-900 rounded-2xl placeholder:text-gray-700 outline-none focus:bg-gray-300 transition"
             />
           </div>
-          <PasswordInput/>
+          <PasswordInput />
 
           <div className="flex justify-between items-center mb-8 text-sm">
             <label className="flex items-center cursor-pointer">
@@ -80,15 +80,8 @@ export default function Register() {
                 type="checkbox"
                 className="w-5 h-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500 focus:ring-2"
               />
-              <span className="ml-2 text-gray-900">Keep me logged in</span>
+              <span className="ml-2 text-gray-900">Let me keep the list</span>
             </label>
-
-            <a
-              href="#"
-              className="text-orange-600 hover:text-orange-700 font-medium"
-            >
-              Forgot password?
-            </a>
           </div>
 
           <button
@@ -99,9 +92,9 @@ export default function Register() {
           </button>
 
           <p className="text-sm text-gray-900">
-            Not registered yet?{" "}
+            Already registered?{" "}
             <a href="#" className="font-bold text-gray-700 hover:text-gray-900">
-              Create an Account
+              Log in
             </a>
           </p>
         </form>
