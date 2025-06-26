@@ -1,10 +1,13 @@
 import Image from "next/image";
-
+import PasswordInput from "../../../components/Input.js";
 export default function Login() {
   return (
     <main className="bg-white rounded-lg py-10 px-6 max-w-4xl mx-auto my-10">
       <div className="flex flex-col items-center">
-        <form action={"/auth/home"} className="w-full max-w-md bg-white p-8 rounded-3xl  text-center">
+        <form
+          action={"/"}
+          className="w-full max-w-md bg-white p-8 rounded-3xl  text-center"
+        >
           <h3 className="mb-4 text-4xl font-extrabold text-gray-900">
             Sign In
           </h3>
@@ -42,20 +45,7 @@ export default function Login() {
             />
           </div>
 
-          <div className="mb-6 text-start">
-            <label
-              htmlFor="password"
-              className="mb-2 block text-sm text-gray-900"
-            >
-              Password*
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              className="w-full px-5 py-4 text-sm font-medium bg-gray-200 text-gray-900 rounded-2xl placeholder:text-gray-700 outline-none focus:bg-gray-300 transition"
-            />
-          </div>
+          <PasswordInput />
 
           <div className="flex justify-between items-center mb-8 text-sm">
             <label className="flex items-center cursor-pointer">
@@ -83,7 +73,10 @@ export default function Login() {
 
           <p className="text-sm text-gray-900">
             Not registered yet?{" "}
-            <a href="#" className="font-bold text-gray-700 hover:text-gray-900">
+            <a
+              href="/auth/register"
+              className="font-bold text-gray-700 hover:text-gray-900"
+            >
               Create an Account
             </a>
           </p>

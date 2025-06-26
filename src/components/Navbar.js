@@ -18,13 +18,13 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden lg:flex lg:gap-x-12 ">
           <a
-            href="/home"
+            href="/main/home"
             className="text-sm font-semibold  hover:text-white/70"
           >
             Home
           </a>
           <a
-            href="/PondZone"
+            href="/main/PondZone"
             className="text-sm font-semibold  hover:text-white/70"
           >
             PondZone
@@ -38,7 +38,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end ">
-          <a href="#" className="text-sm font-semibold ">
+          <a href="/auth/login" className="text-sm font-semibold ">
             Log in →
           </a>
         </div>

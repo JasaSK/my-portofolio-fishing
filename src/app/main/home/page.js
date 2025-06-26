@@ -1,8 +1,8 @@
 // import Navbar from "../../components/Navbar.js";
-import Background from "../../components/Background.js";
-import Produk from "../../components/Product.js";
-import Gird from "../../components/Grid.js";
-import FadeInSection from "../../components/FadeInSection.js";
+import Background from "../../../components/Background.js";
+import Produk from "../../../components/Product.js";
+import Gird from "../../../components/Grid.js";
+import FadeInSection from "../../../components/FadeInSection.js";
 
 export default function Home() {
   return (

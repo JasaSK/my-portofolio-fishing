@@ -1,6 +1,6 @@
-import { Background1 } from "../../components/Background.js";
-import { Product1 } from "../../components/Product.js";
-import FadeInSection from "../../components/FadeInSection.js";
+import { Background1 } from "../../../components/Background.js";
+import { Product1 } from "../../../components/Product.js";
+import FadeInSection from "../../../components/FadeInSection.js";
 
 export default function PondZone() {
   return (
