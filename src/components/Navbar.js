@@ -56,7 +56,7 @@ export default function Navbar() {
           >
             PondZone
           </a>
-          <a href="#" className="text-sm font-semibold hover:text-white/70">
+          <a href="/main/profile" className="text-sm font-semibold hover:text-white/70">
             Profile
           </a>
         </div>
