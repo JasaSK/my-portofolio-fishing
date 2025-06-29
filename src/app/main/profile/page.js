@@ -20,7 +20,7 @@ export default function Profile() {
             <Image
               src="/images/background.jpg"
               alt="User Profile"
-              className="rounded-md lg:w-[12rem] lg:h-[12rem] md:w-[10rem] md:h-[10rem] sm:w-[8rem] sm:h-[8rem] w-[7rem] h-[7rem] outline outline-2 outline-offset-2 outline-blue-500 relative lg:bottom-[5rem] sm:bottom-[4rem] bottom-[3rem]"
+              className="rounded-md lg:w-[12rem] lg:h-[12rem] md:w-[10rem] md:h-[10rem] sm:w-[8rem] sm:h-[8rem] w-[7rem] h-[7rem] outline outline-2 outline-offset-2 outline-orange-500 relative lg:bottom-[5rem] sm:bottom-[4rem] bottom-[3rem]"
               width={300}
               height={300}
             />

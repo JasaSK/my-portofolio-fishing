@@ -17,7 +17,7 @@ export default function Login() {
 
             <button
               type="button"
-              className="flex items-center justify-center w-full py-4 mb-6 text-sm font-medium rounded-2xl text-gray-900 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 transition"
+              className="flex items-center justify-center w-full py-4 mb-6 text-sm font-medium rounded-2xl text-gray-900 bg-[#FCECDD] hover:bg-[#FFE6C9] focus:bg-[#FFE6C9] transition"
             >
               <Image
                 src="/images/google.png"
@@ -46,7 +46,7 @@ export default function Login() {
                 id="email"
                 type="email"
                 placeholder="mail@loopple.com"
-                className="w-full px-5 py-4 text-sm font-medium bg-gray-200 text-gray-900 rounded-2xl placeholder:text-gray-700 outline-none focus:bg-gray-300 transition"
+                className="w-full px-5 py-4 text-sm font-medium bg-[#FCECDD] hover:bg-[#FFE6C9] focus:bg-[#FFE6C9] text-gray-900 rounded-2xl placeholder:text-gray-700 outline-none  transition"
               />
             </div>
 

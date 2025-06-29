@@ -15,7 +15,7 @@ export default function PasswordInput() {
           id="password"
           type={showPassword ? "text" : "password"}
           placeholder="Enter your password"
-          className="w-full px-5 py-4 text-sm font-medium bg-gray-200 text-gray-900 rounded-2xl placeholder:text-gray-700 outline-none focus:bg-gray-300 transition pr-24"
+          className="w-full px-5 py-4 text-sm font-medium bg-[#FCECDD] hover:bg-[#FFE6C9] focus:bg-[#FFE6C9] text-gray-900 rounded-2xl placeholder:text-gray-700 outline-none transition pr-24"
         />
         <button
           type="button"
