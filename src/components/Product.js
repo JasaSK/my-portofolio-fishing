@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import FadeInSection from "./FadeInSection.js";
-
+import { useState } from "react";
 const products = [
   {
     id: 1,
@@ -59,9 +59,53 @@ const products = [
     price: "$35",
     image: "/images/background.jpg",
   },
+  {
+    id: 9,
+    name: "Basic Tee",
+    color: "Black",
+    price: "$35",
+    image: "/images/background.jpg",
+  },
+  {
+    id: 10,
+    name: "Basic Tee",
+    color: "Black",
+    price: "$35",
+    image: "/images/background.jpg",
+  },
+  {
+    id: 11,
+    name: "Basic Tee",
+    color: "Black",
+    price: "$35",
+    image: "/images/background.jpg",
+  },
+  {
+    id: 12,
+    name: "Basic Tee",
+    color: "Black",
+    price: "$35",
+    image: "/images/background.jpg",
+  },
+  {
+    id: 13,
+    name: "Basic Tee",
+    color: "Black",
+    price: "$35",
+    image: "/images/background.jpg",
+  },
+  {
+    id: 14,
+    name: "Basic Tee",
+    color: "Black",
+    price: "$35",
+    image: "/images/background.jpg",
+  },
 ];
 
 export default function Product() {
+  const [showAll, setShowAll] = useState(false);
+  const visibleProducts = showAll ? products : products.slice(0, 8);
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -73,7 +117,7 @@ export default function Product() {
           </FadeInSection>
           <FadeInSection direction="right">
             <a
-              href="/produk"
+              href="/main/PondZone"
               className="text-sm font-medium font-sans tracking-tight text-gray-900 cursor-pointer hover:text-orange-600 transition"
             >
               Telusuri lebih lanjut →
@@ -82,7 +126,7 @@ export default function Product() {
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 animate-fadeInUp">
-          {products.map((product) => (
+          {visibleProducts.map((product) => (
             <FadeInSection key={product.id}>
               <div className="group relative">
                 <Image
@@ -117,6 +161,9 @@ export default function Product() {
 }
 
 export function Product1() {
+  const [showAll, setShowAll] = useState(false);
+  const visibleProducts = showAll ? products : products.slice(0, 8);
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -129,9 +176,9 @@ export function Product1() {
         </div>
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {products.map((product) => (
+          {visibleProducts.map((product) => (
             <FadeInSection key={product.id}>
-              <a key={product.id} href="#" className="group">
+              <a href="#" className="group">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -148,16 +195,19 @@ export function Product1() {
           ))}
         </div>
 
-        <div className="flex justify-center mt-10">
-          <FadeInSection direction="in">
-            <button
-              type="button"
-              className="w-lg cursor-pointer flex items-center justify-center text-gray-900 bg-white border border-gray-300 transition duration-500 ease-out hover:border-orange-500 hover:text-orange-500 focus:outline-none focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2"
-            >
-              Telusuri lebih lanjut
-            </button>
-          </FadeInSection>
-        </div>
+        {!showAll && (
+          <div className="flex justify-center mt-10">
+            <FadeInSection direction="in">
+              <button
+                type="button"
+                onClick={() => setShowAll(true)}
+                className="w-lg cursor-pointer flex items-center justify-center text-gray-900 bg-white border border-gray-300 transition duration-500 ease-out hover:border-orange-500 hover:text-orange-500 focus:outline-none focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2"
+              >
+                Telusuri lebih lanjut
+              </button>
+            </FadeInSection>
+          </div>
+        )}
       </div>
     </div>
   );
