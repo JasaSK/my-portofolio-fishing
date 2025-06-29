@@ -1,13 +1,14 @@
-// components/background.tsx
+import Image from "next/image";
 
 export default function Background() {
   return (
-    <div className="absolute inset-0 -z-10 ">
-      <div
-        className="w-full h-full bg-center bg-cover"
-        style={{
-          backgroundImage: "url('/images/background2.jpg')",
-        }}
+    <div className="absolute inset-0 -z-10">
+      <Image
+        src="/images/background2.jpg"
+        alt="Background Image"
+        fill
+        priority
+        className="object-cover"
       />
       <div
         className="absolute inset-0 pointer-events-none"
@@ -22,12 +23,13 @@ export default function Background() {
 
 export function Background1() {
   return (
-    <div className="absolute inset-0 -z-10 ">
-      <div
-        className="w-full h-full bg-center bg-cover"
-        style={{
-          backgroundImage: "url('/images/background.jpg')",
-        }}
+    <div className="absolute inset-0 -z-10">
+      <Image
+        src="/images/background.jpg"
+        alt="Background Image 1"
+        fill
+        priority
+        className="object-cover"
       />
       <div
         className="absolute inset-0 pointer-events-none"

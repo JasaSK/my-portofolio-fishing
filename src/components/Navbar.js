@@ -29,6 +29,14 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isOpen]);
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 text-white transition-all duration-300 ${
@@ -56,7 +64,10 @@ export default function Navbar() {
           >
             PondZone
           </a>
-          <a href="/main/profile" className="text-sm font-semibold hover:text-white/70">
+          <a
+            href="/main/profile"
+            className="text-sm font-semibold hover:text-white/70"
+          >
             Profile
           </a>
         </div>

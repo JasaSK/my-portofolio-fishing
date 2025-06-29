@@ -3,23 +3,30 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function MobileMenu({ isOpen, onClose }) {
-  if (!isOpen) return null;
-
   return (
     <>
+      {/* Overlay Backdrop */}
       <div
-        className="fixed inset-0 z-40 bg-black bg-opacity-50"
+        className={`fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300 ${
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
         onClick={onClose}
       ></div>
-      <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto bg-white p-6">
+
+      {/* Slide-in Panel */}
+      <div
+        className={`fixed inset-0 z-50 h-screen bg-white p-6 transform transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "translate-x-full pointer-events-none"
+        } overflow-y-auto`}
+      >
         <div className="flex items-center justify-between">
           <Link href="/" className="-m-1.5 p-1.5">
             <Image
               className="h-8 w-auto"
-              src="/images/Screenshot 2025-03-08 011652.png"
+              src="/images/background.jpg"
               alt="Logo"
-              width={500}
-              height={600}
+              width={50}
+              height={60}
             />
           </Link>
           <button
@@ -43,7 +50,8 @@ export default function MobileMenu({ isOpen, onClose }) {
             </svg>
           </button>
         </div>
-        <div className="mt-6 flow-root">
+
+        <div className="mt-6">
           <div className="-my-6 divide-y divide-gray-500/10">
             <div className="space-y-2 py-6">
               {[
@@ -54,6 +62,7 @@ export default function MobileMenu({ isOpen, onClose }) {
                 <Link
                   key={item.name}
                   href={item.href}
+                  onClick={onClose}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   {item.name}
