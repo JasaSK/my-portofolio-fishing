@@ -106,6 +106,8 @@ const products = [
 export default function Product() {
   const [showAll, setShowAll] = useState(false);
   const visibleProducts = showAll ? products : products.slice(0, 8);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -125,10 +127,14 @@ export default function Product() {
           </FadeInSection>
         </div>
 
+        {/* GRID PRODUK */}
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 animate-fadeInUp">
           {visibleProducts.map((product) => (
             <FadeInSection key={product.id}>
-              <div className="group relative">
+              <div
+                className="group relative cursor-pointer"
+                onClick={() => setSelectedProduct(product)}
+              >
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -155,6 +161,37 @@ export default function Product() {
             </FadeInSection>
           ))}
         </div>
+
+        {/* MODAL DITARUH DI SINI */}
+        {selectedProduct && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/50 px-4">
+            <div className="relative bg-white rounded-lg p-6 max-w-sm w-full shadow-lg">
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl"
+              >
+                &times;
+              </button>
+              <FadeInSection direction="in">
+                <Image
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  width={500}
+                  height={500}
+                  className="w-full rounded-md"
+                />
+                <h2 className="mt-4 text-lg font-bold text-gray-900">
+                  {selectedProduct.name}
+                </h2>
+                <p className="text-sm text-gray-500">{selectedProduct.color}</p>
+                <p className="mt-2 text-md font-semibold text-gray-900">
+                  {selectedProduct.price}
+                </p>
+              </FadeInSection>
+            </div>
+          </div>
+        )}
+        
       </div>
     </div>
   );
@@ -178,7 +215,7 @@ export function Product1() {
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {visibleProducts.map((product) => (
             <FadeInSection key={product.id}>
-              <a href="#" className="group">
+              <a href="" className="group">
                 <Image
                   src={product.image}
                   alt={product.name}

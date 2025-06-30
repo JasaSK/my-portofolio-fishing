@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import MobileMenu from "./MobileMenu";
 
-export default function Navbar() {
+export default function Navbar({ bg = "bg-black/30 backdrop-blur shadow-md" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,7 +40,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 text-white transition-all duration-300 ${
-        isScrolled ? "bg-black/30 backdrop-blur shadow-md" : "bg-transparent"
+        isScrolled ? bg : "bg-transparent"
       } ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}
     >
       <nav className="flex items-center justify-between p-6 lg:px-8">

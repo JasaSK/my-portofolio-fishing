@@ -13,7 +13,7 @@ export default function Home() {
           <div className="w-full max-w-3xl lg:max-w-5xl mx-auto py-16 sm:py-24 lg:py-32">
             <FadeInSection direction="in">
               <div className="mb-6 flex justify-center sm:mb-8 animate-fadeInLeft">
-                <div className="relative rounded-md sm:rounded-full px-3 py-1 text-xs sm:text-sm text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                <div className="relative rounded-md sm:rounded-full px-3 py-1 text-xs sm:text-sm text-gray-100 ring-1 ring-gray-100/10 hover:ring-gray-100/20">
                   Announcing our next round of funding.{" "}
                   <a href="#" className="font-semibold text-orange-500">
                     <span
@@ -28,7 +28,7 @@ export default function Home() {
 
             <div className="text-center">
               <FadeInSection direction="in">
-                <h1 className="text-3xl sm:text-5xl lg:text-7xl font-semibold tracking-tight text-white animate-scaleIn">
+                <h1 className="text-3xl sm:text-5 xl lg:text-7xl font-semibold tracking-tight text-white animate-scaleIn">
                   Data to enrich your online business
                 </h1>
               </FadeInSection>
