@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import MobileMenu from "./MobileMenu";
+import Link from "next/link";
 
 export default function Navbar({ bg = "bg-black/30 backdrop-blur shadow-md" }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,37 +46,43 @@ export default function Navbar({ bg = "bg-black/30 backdrop-blur shadow-md" }) {
     >
       <nav className="flex items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="#" className="-m-1.5 p-1.5">
             <h1 className="font-bold">Pemancingan</h1>
-          </a>
+          </Link>
         </div>
 
         {/* Desktop nav */}
         <div className="hidden lg:flex lg:gap-x-12">
-          <a
+          <Link
             href="/main/home"
             className="text-sm font-semibold hover:text-white/70"
           >
             Home
-          </a>
-          <a
+          </Link>
+          <Link
             href="/main/PondZone"
             className="text-sm font-semibold hover:text-white/70"
           >
             PondZone
-          </a>
-          <a
+          </Link>
+          <Link
             href="/main/profile"
             className="text-sm font-semibold hover:text-white/70"
           >
             Profile
-          </a>
+          </Link>
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="/auth/login" className="text-sm font-semibold">
-            Log in →
-          </a>
+          <Link
+            href="/auth/login"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-gray-500 hover:text-orange-600 transition-colors duration-300 group"
+          >
+            Log in
+            <span className="transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
         </div>
 
         {/* Hamburger icon */}

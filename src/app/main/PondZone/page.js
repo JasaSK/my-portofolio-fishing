@@ -1,5 +1,5 @@
 import { Background1 } from "../../../components/Background.js";
-import { Product1 } from "../../../components/Product.js";
+import {ProductListPondZone} from "../../../components/Product.js";
 import FadeInSection from "../../../components/FadeInSection.js";
 
 export default function PondZone() {
@@ -36,7 +36,8 @@ export default function PondZone() {
         </div>
       </main>
 
-      <Product1 />
+      <ProductListPondZone />
+      
     </>
   );
 }
