@@ -10,6 +10,7 @@ export default function ProductDetail({ id }) {
   const [mainImage, setMainImage] = useState(product?.image || "");
   const [quantity, setQuantity] = useState(1);
   const thumbnails = [product.image, ...(product.images || [])];
+  const stock = product.stock || 0;
 
   if (!product) {
     return <div className="text-center mt-20">Produk tidak ditemukan.</div>;
@@ -37,8 +38,8 @@ export default function ProductDetail({ id }) {
   };
 
   return (
-    <div className="mt-20 bg-white text-gray-800 min-h-screen">
-      <div className="container mx-auto px-4 py-8">
+    <div className="mt-20  text-gray-800 min-h-screen">
+      <div className="bg-white container mx-auto px-4 py-8">
         <div className="flex flex-wrap -mx-4">
           {/* LEFT: IMAGES */}
           <div className="w-full md:w-1/2 px-4 mb-8">
@@ -109,21 +110,42 @@ export default function ProductDetail({ id }) {
             <p className="text-sm mt-4">{product.description}</p>
 
             <div className="mt-4">
-              <label
-                htmlFor="quantity"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Jumlah Ticket:
               </label>
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="1"
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-                className="w-24 px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-center"
-              />
+
+              <div className="flex items-center gap-3 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                    className="w-8 h-8 rounded-md bg-gray-200 hover:bg-gray-300 text-lg font-bold flex items-center justify-center"
+                  >
+                    -
+                  </button>
+                  <div className="w-16 text-center border border-gray-200 rounded-md px-2 py-1 bg-white text-gray-800 text-base">
+                    {quantity}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity((q) => Math.min(stock, q + 1))}
+                    disabled={quantity >= stock}
+                    className={`w-8 h-8 rounded-md ${
+                      quantity >= stock
+                        ? "bg-gray-300 cursor-not-allowed"
+                        : "bg-gray-200 hover:bg-gray-300"
+                    } text-lg font-bold flex items-center justify-center`}
+                  >
+                    +
+                  </button>
+                </div>
+
+                <p className="text-sm text-gray-600">
+                  Tersisa{" "}
+                  <span className="font-semibold">{stock - quantity}</span>{" "}
+                  tiket hari ini
+                </p>
+              </div>
             </div>
 
             <div className="flex space-x-4 mt-6">
@@ -136,9 +158,12 @@ export default function ProductDetail({ id }) {
             </div>
           </div>
         </div>
-
-        {/* Komponen Reviews */}
-        <Reviews reviews={productReviews} />
+      </div>
+      <div className="mt-10  text-gray-800 min-h-screen">
+        <div className="bg-white container mx-auto px-4 py-8">
+          {/* Komponen Reviews */}
+          <Reviews reviews={productReviews} />
+        </div>
       </div>
     </div>
   );

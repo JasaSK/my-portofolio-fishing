@@ -14,6 +14,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -32,6 +33,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -50,6 +52,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -68,6 +71,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -86,6 +90,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -104,6 +109,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -122,6 +128,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -140,6 +147,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -158,6 +166,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -176,6 +185,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -194,6 +204,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -212,6 +223,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },
@@ -230,6 +242,7 @@ export const products = [
       "/images/pancing4.jpg",
     ],
     sold: 58,
+    stock: 25,
     description:
       " Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan.",
   },

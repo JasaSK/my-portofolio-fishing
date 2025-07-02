@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link.js";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { products } from "../data/DataProduct.js"; // Pastikan path sesuai
+import { reviews } from "../data/DataReviews.js";
 
 export default function ProductList() {
   const [showAll, setShowAll] = useState(false);
@@ -100,7 +101,10 @@ export default function ProductList() {
                         }
                       })}
                   </div>
-
+                  <p className="text-xs text-gray-500">
+                    {reviews.filter((r) => r.productId === product.id).length}{" "}
+                    ulasan
+                  </p>
                   <p className="text-sm text-gray-500 truncate">
                     Mojokerto, Pacet
                   </p>
@@ -197,7 +201,10 @@ export function ProductListPondZone() {
                         }
                       })}
                   </div>
-
+                  <p className="text-xs text-gray-500">
+                    {reviews.filter((r) => r.productId === product.id).length}{" "}
+                    ulasan
+                  </p>
                   <p className="text-sm text-gray-500 truncate">
                     Mojokerto, Pacet
                   </p>
