@@ -4,6 +4,7 @@ import { products } from "../data/DataProduct.js";
 import { reviews } from "../data/DataReviews.js";
 import { useState } from "react";
 import Reviews from "./Reviews.js";
+import ProductProfile from "./ProductProfile.js";
 
 export default function ProductDetail({ id }) {
   const product = products.find((item) => item.id === Number(id));
@@ -38,7 +39,7 @@ export default function ProductDetail({ id }) {
   };
 
   return (
-    <div className="mt-20  text-gray-800 min-h-screen">
+    <div className="mt-20  text-gray-800">
       <div className="bg-white container mx-auto px-4 py-8">
         <div className="flex flex-wrap -mx-4">
           {/* LEFT: IMAGES */}
@@ -159,9 +160,16 @@ export default function ProductDetail({ id }) {
           </div>
         </div>
       </div>
-      <div className="mt-10  text-gray-800 min-h-screen">
+      {/* Profile Section */}
+      <div className="mt-10 text-gray-800">
         <div className="bg-white container mx-auto px-4 py-8">
-          {/* Komponen Reviews */}
+          <ProductProfile product={product} />
+        </div>
+      </div>
+
+      {/* Reviews Section */}
+      <div className="mt-10 text-gray-800">
+        <div className="bg-white container mx-auto px-4 py-8">
           <Reviews reviews={productReviews} />
         </div>
       </div>

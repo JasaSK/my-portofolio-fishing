@@ -1,23 +1,26 @@
 export const products = [
   {
-    id: 1,
-    name: "Tempat Pemancingan",
-    price: "Rp.30000",
-    status: "available",
-    rating: 4,
-    address: "Mojokerto, Pacet",
-    image: "/images/background.jpg",
-    images: [
-      "/images/pancing1.jpg",
-      "/images/pancing2.jpg",
-      "/images/pancing3.jpg",
-      "/images/pancing4.jpg",
-    ],
-    sold: 58,
-    stock: 25,
-    description:
-      " lorem insumLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
+  id: 1,
+  name: "Tempat Pemancingan",
+  price: "Rp.30000",
+  status: "available",
+  rating: 4,
+  address: "Mojokerto, Pacet",
+  contact: "0812-1234-5678",
+  owner: "Pak Slamet",
+  openHours: "08.00 - 17.00",
+  image: "/images/background.jpg",
+  images: [
+    "/images/pancing1.jpg",
+    "/images/pancing2.jpg",
+    "/images/pancing3.jpg",
+    "/images/pancing4.jpg"
+  ],
+  sold: 58,
+  stock: 25,
+  description: "Tempat pemancingan terbaik di Mojokerto, Pacet. Nikmati pengalaman memancing yang menyenangkan."
+},
+
   {
     id: 2,
     name: "Tempat Pemancingan",
