@@ -1,112 +1,89 @@
+"use client";
+
 import Image from "next/image";
 import PasswordInput from "../../../components/Input.js";
 import FadeInSection from "../../../components/FadeInSection.js";
+
 export default function Login() {
   return (
     <FadeInSection direction="in">
-      <main className="bg-white rounded-lg py-10 px-6 max-w-4xl mx-auto my-10">
-        <div className="flex flex-col items-center">
-          <form
-            action={"/"}
-            className="w-full max-w-md bg-white p-8 rounded-3xl  text-center"
+      <main className="min-h-screen bg-zinc-900 flex items-center justify-center px-4 py-10">
+        <div className="w-full max-w-md bg-zinc-800 text-white shadow-xl rounded-2xl p-6 sm:p-8">
+          <h2 className="text-3xl font-bold text-orange-400 text-center mb-2">
+            Selamat Datang
+          </h2>
+          <p className="text-zinc-300 text-center mb-6 text-sm">
+            Masuk ke akun Anda di{" "}
+            <span className="font-semibold text-orange-500">PondZone</span>
+          </p>
+
+          <button
+            type="button"
+            className="flex items-center justify-center w-full py-3 mb-6 rounded-xl border border-zinc-600 bg-zinc-700 hover:bg-zinc-600 transition text-sm text-white font-medium"
           >
-            <h3 className="mb-4 text-4xl font-extrabold text-gray-900">
-              Sign In
-            </h3>
-            <p className="mb-6 text-gray-700">Enter your email and password</p>
+            <Image
+              src="/images/google.png"
+              alt="Google Logo"
+              width={20}
+              height={20}
+              className="mr-2"
+            />
+            Masuk dengan Google
+          </button>
 
-            <button
-              type="button"
-              className="flex items-center justify-center w-full py-4 mb-6 text-sm font-medium rounded-2xl text-gray-900 bg-[#FCECDD] hover:bg-[#FFE6C9] focus:bg-[#FFE6C9] transition"
-            >
-              <Image
-                src="/images/google.png"
-                alt="Google Logo"
-                width={20}
-                height={20}
-                className="mr-2"
-              />
-              Sign in with Google
-            </button>
+          <div className="flex items-center my-6">
+            <hr className="flex-grow border-zinc-600" />
+            <span className="mx-4 text-zinc-400 text-sm">atau</span>
+            <hr className="flex-grow border-zinc-600" />
+          </div>
 
-            <div className="flex items-center mb-6">
-              <hr className="flex-grow border-gray-400" />
-              <span className="mx-4 text-gray-600 text-sm">or</span>
-              <hr className="flex-grow border-gray-400" />
-            </div>
-
-            <div className="mb-5 text-start">
+          <form action="/" className="space-y-5">
+            <div>
               <label
                 htmlFor="email"
-                className="mb-2 block text-sm text-gray-900"
+                className="block text-sm font-medium text-zinc-300 mb-1"
               >
-                Email*
+                Email
               </label>
               <input
                 id="email"
                 type="email"
-                placeholder="mail@loopple.com"
-                className="w-full px-5 py-4 text-sm font-medium bg-[#FCECDD] hover:bg-[#FFE6C9] focus:bg-[#FFE6C9] text-gray-900 rounded-2xl placeholder:text-gray-700 outline-none  transition"
+                placeholder="you@example.com"
+                className="w-full px-4 py-3 border border-zinc-600 bg-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm text-white placeholder-zinc-400"
               />
             </div>
 
-            <PasswordInput />
+            <PasswordInput dark />
 
-            <div className="flex justify-between items-center mb-8 text-sm">
-              <label className="flex items-center cursor-pointer">
+            <div className="flex justify-between items-center text-sm">
+              <label className="flex items-center">
                 <input
                   type="checkbox"
-                  className="w-5 h-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500 focus:ring-2"
+                  className="w-4 h-4 mr-2 text-orange-500 bg-zinc-700 border-zinc-500 focus:ring-orange-500 rounded"
                 />
-                <span className="ml-2 text-gray-900">Keep me logged in</span>
+                <span className="text-zinc-300">Ingat saya</span>
               </label>
-
-              <a
-                href="#"
-                className="text-orange-600 hover:text-orange-700 font-medium"
-              >
-                Forgot password?
+              <a href="#" className="text-orange-400 hover:underline">
+                Lupa password?
               </a>
             </div>
 
             <button
               type="submit"
-              className="w-full px-6 py-5 mb-5 text-sm font-bold text-white bg-orange-500 rounded-2xl hover:bg-orange-600 focus:ring-4 focus:ring-orange-100 transition"
+              className="w-full bg-orange-500 text-white font-semibold py-3 rounded-xl hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 transition"
             >
-              Sign In
+              Masuk
             </button>
-
-            <p className="text-sm text-gray-900">
-              Not registered yet?{" "}
-              <a
-                href="/auth/register"
-                className="font-bold text-gray-700 hover:text-gray-900"
-              >
-                Create an Account
-              </a>
-            </p>
           </form>
 
-          <p className="text-sm text-slate-500 py-5 text-center">
-            Tailwind CSS Component from{" "}
+          <p className="text-center text-sm text-zinc-400 mt-6">
+            Belum punya akun?{" "}
             <a
-              href="https://www.loopple.com/theme/motion-landing-library?ref=tailwindcomponents"
-              className="text-slate-700 hover:text-slate-900"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/auth/register"
+              className="text-orange-400 hover:underline font-semibold"
             >
-              Motion Landing Library
-            </a>{" "}
-            by{" "}
-            <a
-              href="https://www.loopple.com"
-              className="text-slate-700 hover:text-slate-900"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Loopple Builder
+              Daftar sekarang
             </a>
-            .
           </p>
         </div>
       </main>

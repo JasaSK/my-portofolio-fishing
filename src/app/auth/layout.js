@@ -19,7 +19,9 @@ export const metadata = {
 export default function AuthLayout({ children }) {
   return (
     <main className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <main className="min-h-screen flex items-center justify-center bg-gray-100 antialiased">{children}</main>
+      <main className="min-h-screen flex items-center justify-center bg-zinc-900 antialiased">
+        {children}
+      </main>
     </main>
   );
 }

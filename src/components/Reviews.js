@@ -1,16 +1,17 @@
 "use client";
 import { useState, useEffect } from "react";
-import { reviews } from "../data/DataReviews";
 import { FaStar, FaStarHalfAlt, FaRegStar, FaHeart } from "react-icons/fa";
 import Image from "next/image";
 
 export default function Reviews({ reviews }) {
   const [selectedRating, setSelectedRating] = useState(null);
-  const [likes, setLikes] = useState({}); // { index: true/false }
+  const [likes, setLikes] = useState({});
   const [likeCounts, setLikeCounts] = useState({});
+  const [showAll, setShowAll] = useState(false); // ✅ state untuk kontrol "tampilkan semua"
+
   useEffect(() => {
     const initialLikes = reviews.reduce((acc, _, idx) => {
-      acc[idx] = 0; // semua like awalnya 0
+      acc[idx] = 0;
       return acc;
     }, {});
     setLikeCounts(initialLikes);
@@ -19,6 +20,10 @@ export default function Reviews({ reviews }) {
   const filteredReviews = selectedRating
     ? reviews.filter((r) => Math.floor(r.rating) === selectedRating)
     : reviews;
+
+  const displayedReviews = showAll
+    ? filteredReviews
+    : filteredReviews.slice(0, 2); // ✅ tampilkan 2 dulu
 
   const ratingSummary = [5, 4, 3, 2, 1].map((star) => ({
     star,
@@ -51,12 +56,10 @@ export default function Reviews({ reviews }) {
 
   const toggleLike = (index) => {
     const alreadyLiked = likes[index];
-
     setLikes((prev) => ({
       ...prev,
       [index]: !alreadyLiked,
     }));
-
     setLikeCounts((prevCounts) => ({
       ...prevCounts,
       [index]: alreadyLiked
@@ -66,7 +69,7 @@ export default function Reviews({ reviews }) {
   };
 
   return (
-    <div className="mt-12">
+    <div className="mt-0">
       <h3 className="text-2xl font-semibold text-gray-800 mb-6">
         Ulasan Pengunjung
       </h3>
@@ -114,73 +117,83 @@ export default function Reviews({ reviews }) {
           Tidak ada ulasan dengan rating {selectedRating} bintang.
         </p>
       ) : (
-        <div className="flex flex-col divide-y divide-gray-200">
-          {filteredReviews.map((review, index) => (
-            <div
-              key={index}
-              className="w-full py-6 flex flex-col sm:flex-row sm:items-start gap-4"
-            >
-              {/* Avatar */}
-              <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-semibold text-sm">
-                {review.name.charAt(0).toUpperCase()}
-              </div>
-
-              {/* Review Content */}
-              <div className="flex-1 space-y-2">
-                {/* Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-900">
-                      {review.name}
-                    </p>
-                    <p className="text-xs text-gray-400">
-                      {review.date || "Baru saja"} ·{" "}
-                      {review.time || "13:00 WIB"}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1 text-sm">
-                    <button
-                      className={`transition ${
-                        likes[index]
-                          ? "text-red-500"
-                          : "text-gray-400 hover:text-red-500"
-                      }`}
-                      onClick={() => toggleLike(index)}
-                    >
-                      <FaHeart className="w-4 h-4" />
-                    </button>
-                    <span className="text-gray-500">
-                      {likeCounts[index] ?? 0}
-                    </span>
-                  </div>
+        <>
+          <div className="flex flex-col divide-y divide-gray-200">
+            {displayedReviews.map((review, index) => (
+              <div
+                key={index}
+                className="w-full py-6 flex flex-col sm:flex-row sm:items-start gap-4"
+              >
+                {/* Avatar */}
+                <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-semibold text-sm">
+                  {review.name.charAt(0).toUpperCase()}
                 </div>
 
-                {/* Rating */}
-                <div className="flex items-center gap-1">
-                  {renderStars(review.rating)}
-                </div>
-
-                {/* Comment */}
-                <p className="text-sm text-gray-700 leading-snug">
-                  “{review.comment}”
-                </p>
-
-                {/* Image Preview */}
-                {review.image && (
-                  <div className="mt-2">
-                    <Image
-                      src={review.image}
-                      alt="Foto tempat"
-                      width={80}
-                      height={80}
-                      className="rounded-md object-cover border"
-                    />
+                {/* Review Content */}
+                <div className="flex-1 space-y-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">
+                        {review.name}
+                      </p>
+                      <p className="text-xs text-gray-400">
+                        {review.date || "Baru saja"} ·{" "}
+                        {review.time || "13:00 WIB"}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1 text-sm">
+                      <button
+                        className={`transition ${
+                          likes[index]
+                            ? "text-red-500"
+                            : "text-gray-400 hover:text-red-500"
+                        }`}
+                        onClick={() => toggleLike(index)}
+                      >
+                        <FaHeart className="w-4 h-4" />
+                      </button>
+                      <span className="text-gray-500">
+                        {likeCounts[index] ?? 0}
+                      </span>
+                    </div>
                   </div>
-                )}
+
+                  <div className="flex items-center gap-1">
+                    {renderStars(review.rating)}
+                  </div>
+
+                  <p className="text-sm text-gray-700 leading-snug">
+                    “{review.comment}”
+                  </p>
+
+                  {review.image && (
+                    <div className="mt-2">
+                      <Image
+                        src={review.image}
+                        alt="Foto tempat"
+                        width={80}
+                        height={80}
+                        className="rounded-md object-cover border"
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
+            ))}
+          </div>
+
+          {/* ✅ Tombol Tampilkan Semua */}
+          {!showAll && filteredReviews.length > 2 && (
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={() => setShowAll(true)}
+                className="text-sm text-blue-600 hover:underline"
+              >
+                Tampilkan semua ulasan
+              </button>
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
     </div>
   );

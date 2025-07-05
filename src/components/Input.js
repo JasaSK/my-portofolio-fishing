@@ -2,12 +2,25 @@
 
 import { useState } from "react";
 
-export default function PasswordInput() {
+export default function PasswordInput({ dark = false }) {
   const [showPassword, setShowPassword] = useState(false);
 
+  const baseInputClass =
+    "w-full px-5 py-4 text-sm font-medium rounded-xl outline-none transition pr-24";
+
+  const lightStyle =
+    "bg-orange-50 border border-orange-200 text-gray-900 placeholder:text-gray-600 focus:ring-2 focus:ring-orange-400 focus:border-transparent";
+  const darkStyle =
+    "bg-zinc-700 border border-zinc-600 text-white placeholder:text-zinc-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent";
+
   return (
-    <div className="mb-6 text-start">
-      <label htmlFor="password" className="mb-2 block text-sm text-gray-900">
+    <div className="text-start">
+      <label
+        htmlFor="password"
+        className={`mb-2 block text-sm ${
+          dark ? "text-zinc-200" : "text-gray-900"
+        }`}
+      >
         Password*
       </label>
       <div className="relative">
@@ -15,12 +28,16 @@ export default function PasswordInput() {
           id="password"
           type={showPassword ? "text" : "password"}
           placeholder="Enter your password"
-          className="w-full px-5 py-4 text-sm font-medium bg-[#FCECDD] hover:bg-[#FFE6C9] focus:bg-[#FFE6C9] text-gray-900 rounded-2xl placeholder:text-gray-700 outline-none transition pr-24"
+          className={`${baseInputClass} ${dark ? darkStyle : lightStyle}`}
         />
         <button
           type="button"
           onClick={() => setShowPassword((prev) => !prev)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-orange-600 hover:text-orange-800 focus:outline-none"
+          className={`absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold focus:outline-none ${
+            dark
+              ? "text-orange-400 hover:text-orange-300"
+              : "text-orange-600 hover:text-orange-800"
+          }`}
         >
           {showPassword ? "Sembunyikan" : "Tampilkan"}
         </button>

@@ -1,10 +1,12 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { products } from "../data/DataProduct.js";
 import { reviews } from "../data/DataReviews.js";
-import { useState } from "react";
 import Reviews from "./Reviews.js";
 import ProductProfile from "./ProductProfile.js";
+import FadeInSection from "./FadeInSection.js";
 
 export default function ProductDetail({ id }) {
   const product = products.find((item) => item.id === Number(id));
@@ -39,140 +41,154 @@ export default function ProductDetail({ id }) {
   };
 
   return (
-    <div className="mt-10 text-gray-800">
-      <div className="bg-white container mx-auto px-4 py-8">
-        <div className="flex flex-wrap -mx-4">
-          {/* LEFT: IMAGES */}
-          <div className="w-full md:w-1/2 px-4 mb-8">
-            {/* Frame Image */}
-            <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] bg-gray-100 rounded-xl shadow-md overflow-hidden">
-              <Image
-                key={mainImage}
-                src={mainImage}
-                alt={product.name}
-                fill
-                className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-              />
-            </div>
-            {/* Thumbnail List */}
-            <div className="mt-4 flex gap-3 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-              {thumbnails.map((img, index) => (
-                <button
-                  key={index}
-                  onClick={() => setMainImage(img)}
-                  className={`relative border-2 rounded-lg overflow-hidden group w-20 h-20 flex-shrink-0 transition-all duration-200 ${
-                    mainImage === img
-                      ? "border-indigo-500"
-                      : "border-gray-200 hover:border-indigo-300"
-                  }`}
-                >
+    <div className="mt-24 text-gray-800">
+      <FadeInSection direction="up">
+        <div className="bg-white container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            {/* LEFT: IMAGES */}
+            <FadeInSection direction="in">
+              <div>
+                <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-gray-100 rounded-xl shadow-md overflow-hidden">
                   <Image
-                    src={img}
-                    alt={`Thumbnail ${index + 1}`}
+                    key={mainImage}
+                    src={mainImage}
+                    alt={product.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
+                    className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
                   />
-                </button>
-              ))}
-            </div>
-          </div>
+                </div>
+                <div className="mt-4 flex gap-3 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+                  {thumbnails.map((img, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setMainImage(img)}
+                      className={`relative border-2 rounded-lg overflow-hidden group w-20 h-20 flex-shrink-0 transition-all duration-200 ${
+                        mainImage === img
+                          ? "border-indigo-500"
+                          : "border-gray-200 hover:border-indigo-300"
+                      }`}
+                    >
+                      <Image
+                        src={img}
+                        alt={`Thumbnail ${index + 1}`}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </FadeInSection>
 
-          {/* RIGHT: INFO */}
-          <div className="w-full md:w-1/2 px-4 space-y-4">
-            <h2 className="text-3xl font-bold">{product.name}</h2>
-            <p className="text-sm text-gray-500">{product.address}</p>
+            {/* RIGHT: INFO */}
+            <FadeInSection direction="right">
+              <div className="space-y-4">
+                <h2 className="text-2xl sm:text-3xl font-bold">
+                  {product.name}
+                </h2>
+                <p className="text-sm text-gray-500">{product.address}</p>
 
-            {/* Statistik */}
-            <div className="flex items-center gap-4 text-sm text-gray-600">
-              <div className="flex items-center">{renderStars()}</div>
-              <span>({rating})</span>
-              <span className="border-l pl-3 border-gray-300">
-                {reviewCount} Ulasan
-              </span>
-              <span className="border-l pl-3 border-gray-300">
-                {soldCount} Terjual
-              </span>
-            </div>
-
-            <p className="text-2xl font-bold text-orange-600">
-              {product.price}
-            </p>
-
-            <span
-              className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${
-                product.status === "available"
-                  ? "bg-green-100 text-green-700"
-                  : "bg-red-100 text-red-700"
-              }`}
-            >
-              {product.status}
-            </span>
-
-            <p className="text-sm mt-4">{product.description}</p>
-
-            <div className="mt-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Jumlah Ticket:
-              </label>
-
-              <div className="flex items-center gap-3 flex-wrap">
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="w-8 h-8 rounded-md bg-gray-200 hover:bg-gray-300 text-lg font-bold flex items-center justify-center"
-                  >
-                    -
-                  </button>
-                  <div className="w-16 text-center border border-gray-200 rounded-md px-2 py-1 bg-white text-gray-800 text-base">
-                    {quantity}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setQuantity((q) => Math.min(stock, q + 1))}
-                    disabled={quantity >= stock}
-                    className={`w-8 h-8 rounded-md ${
-                      quantity >= stock
-                        ? "bg-gray-300 cursor-not-allowed"
-                        : "bg-gray-200 hover:bg-gray-300"
-                    } text-lg font-bold flex items-center justify-center`}
-                  >
-                    +
-                  </button>
+                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                  <div className="flex items-center">{renderStars()}</div>
+                  <span>({rating})</span>
+                  <span className="border-l pl-3 border-gray-300">
+                    {reviewCount} Ulasan
+                  </span>
+                  <span className="border-l pl-3 border-gray-300">
+                    {soldCount} Terjual
+                  </span>
                 </div>
 
-                <p className="text-sm text-gray-600">
-                  Tersisa{" "}
-                  <span className="font-semibold">{stock - quantity}</span>{" "}
-                  tiket hari ini
+                <p className="text-2xl font-bold text-orange-600">
+                  {product.price}
                 </p>
-              </div>
-            </div>
 
-            <div className="flex space-x-4 mt-6">
-              <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md transition">
-                Pesan Sekarang
-              </button>
-              <button className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-2 rounded-md transition">
-                Wishlist
-              </button>
-            </div>
+                <span
+                  className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${
+                    product.status === "available"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }`}
+                >
+                  {product.status}
+                </span>
+
+                <p className="text-sm mt-4 leading-relaxed">
+                  {product.description}
+                </p>
+
+                <div className="mt-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Jumlah Ticket:
+                  </label>
+
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                        className="w-8 h-8 rounded-md bg-gray-200 hover:bg-gray-300 text-lg font-bold flex items-center justify-center"
+                      >
+                        -
+                      </button>
+                      <div className="w-16 text-center border border-gray-200 rounded-md px-2 py-1 bg-white text-gray-800 text-base">
+                        {quantity}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setQuantity((q) => Math.min(stock, q + 1))
+                        }
+                        disabled={quantity >= stock}
+                        className={`w-8 h-8 rounded-md ${
+                          quantity >= stock
+                            ? "bg-gray-300 cursor-not-allowed"
+                            : "bg-gray-200 hover:bg-gray-300"
+                        } text-lg font-bold flex items-center justify-center`}
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <p className="text-sm text-gray-600">
+                      Tersisa{" "}
+                      <span className="font-semibold">{stock - quantity}</span>{" "}
+                      tiket hari ini
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                  <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md transition">
+                    Pesan Sekarang
+                  </button>
+                  <button className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-2 rounded-md transition">
+                    Wishlist
+                  </button>
+                </div>
+              </div>
+            </FadeInSection>
           </div>
         </div>
-      </div>
+      </FadeInSection>
+
       {/* Profile Section */}
-      <div className="mt-10 text-gray-800">
-        <div className="bg-white container mx-auto px-4 py-8">
-          <ProductProfile product={product} />
+      <FadeInSection direction="up">
+        <div className="mt-10 text-gray-800">
+          <div className="bg-white container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <ProductProfile product={product} />
+          </div>
         </div>
-      </div>
+      </FadeInSection>
 
       {/* Reviews Section */}
-      <div className="mt-10 text-gray-800">
-        <div className="bg-white container mx-auto px-4 py-8">
-          <Reviews reviews={productReviews} />
+      <FadeInSection direction="up">
+        <div className="mt-10 text-gray-800">
+          <div className="bg-white container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <Reviews reviews={productReviews} />
+          </div>
         </div>
-      </div>
+      </FadeInSection>
     </div>
   );
 }
