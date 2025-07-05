@@ -7,9 +7,9 @@ import FadeInSection from "../../../components/FadeInSection.js";
 export default function Home() {
   return (
     <>
-      <main className="relative h-[60vh] sm:h-[80vh] lg:h-screen">
+      <main className="relative py-20 sm:py-28 lg:py-36 overflow-hidden">
         <BackgroundImage />
-        <section className="relative container mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-36">
+        <section className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto py-16 sm:py-24 lg:py-32 text-center">
             <FadeInSection direction="in">
               <div className="mb-6 sm:mb-8">
