@@ -1,11 +1,11 @@
 "use client";
 import FadeInSection from "./FadeInSection";
-import { Background1 } from "./Background.js";
+import { BackgroundGradient } from "./Background.js";
 
 export default function Footer() {
   return (
     <footer className="relative bg-none">
-      <Background1 className="inset-0 h-full" />
+      <BackgroundGradient className="inset-0 h-full" />
 
       <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-3">

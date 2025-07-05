@@ -1,14 +1,17 @@
 import Image from "next/image";
 
-export default function Background() {
+// Komponen background dengan gambar
+export function BackgroundImage() {
   return (
-    <div className="absolute inset-0 -z-10">
+    <div className="absolute inset-0 -z-10 w-full h-full">
       <Image
         src="/images/background.jpg"
-        alt="Background Image"
+        alt="Background"
         fill
         priority
+        quality={80}
         className="object-cover"
+        sizes="100vw"
       />
       <div
         className="absolute inset-0 pointer-events-none"
@@ -20,11 +23,12 @@ export default function Background() {
     </div>
   );
 }
-// Background.js
-export function Background1({ className = "inset-0" }) {
+
+// Komponen background dengan gradasi (tanpa gambar)
+export function BackgroundGradient({ className = "inset-0" }) {
   return (
     <div
-      className={`absolute ${className} -z-10 bg-gradient-to-b from-[#0d1b2a] via-[#1b263b] to-[#0d1b2a]`}
+      className={`absolute ${className} -z-10 w-full h-full bg-gradient-to-b from-[#0d1b2a] via-[#1b263b] to-[#0d1b2a]`}
     >
       <div
         className="absolute inset-0 pointer-events-none"
@@ -36,4 +40,3 @@ export function Background1({ className = "inset-0" }) {
     </div>
   );
 }
-

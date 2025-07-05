@@ -1,5 +1,5 @@
 // import Navbar from "../../components/Navbar.js";
-import Background from "../../../components/Background.js";
+import { BackgroundImage } from "../../../components/Background.js";
 import Produk from "../../../components/Product.js";
 import Gird from "../../../components/Grid.js";
 import FadeInSection from "../../../components/FadeInSection.js";
@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <main className="relative h-[60vh] sm:h-[80vh] lg:h-screen">
-        <Background />
+        <BackgroundImage />
         <section className="relative container mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-36">
           <div className="max-w-4xl mx-auto py-16 sm:py-24 lg:py-32 text-center">
             <FadeInSection direction="in">
