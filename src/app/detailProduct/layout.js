@@ -20,12 +20,6 @@ export const metadata = {
 export default function AuthLayout({ children }) {
   return (
     <main className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <Navbar
-        transparent={false}
-        scrollEffect={true}
-        className="bg-[radial-gradient(circle_at_center,_#0a0f1f_0%,_rgba(0,0,0,0.6)_70%,_rgba(0,0,0,0.9)_100%)]"
-      />
-
       <main className="min-h-screen flex items-center justify-center bg-gray-100 antialiased">
         {children}
       </main>

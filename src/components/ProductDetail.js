@@ -39,7 +39,7 @@ export default function ProductDetail({ id }) {
   };
 
   return (
-    <div className="mt-20  text-gray-800">
+    <div className="mt-10 text-gray-800">
       <div className="bg-white container mx-auto px-4 py-8">
         <div className="flex flex-wrap -mx-4">
           {/* LEFT: IMAGES */}
