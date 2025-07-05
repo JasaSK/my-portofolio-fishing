@@ -56,7 +56,7 @@ export default function MobileMenu({ isOpen, onClose }) {
             <div className="space-y-2 py-6">
               {[
                 { name: "Home", href: "/main/home" },
-                { name: "PondZone", href: "/main/PondZone" },
+                { name: "PondZone", href: "/main/pondzone" },
                 { name: "Profile", href: "/main/profile" },
               ].map((item) => (
                 <Link
