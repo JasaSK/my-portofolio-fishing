@@ -7,7 +7,7 @@ import FadeInSection from "../../../components/FadeInSection.js";
 export default function Login() {
   return (
     <FadeInSection direction="in">
-      <main className="min-h-screen bg-zinc-900 flex items-center justify-center px-4 py-10">
+      <main className="min-h-screen bg-zinc-900 flex items-center justify-center px-4">
         <div className="w-full max-w-md bg-zinc-800 text-white shadow-xl rounded-2xl p-6 sm:p-8">
           <h2 className="text-3xl font-bold text-orange-400 text-center mb-2">
             Selamat Datang

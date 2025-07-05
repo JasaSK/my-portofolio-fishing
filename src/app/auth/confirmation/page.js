@@ -39,7 +39,7 @@ export default function ConfirmationPage() {
   };
 
   return (
-    <main className="min-h-screen bg-zinc-900 flex items-center justify-center px-4 py-10">
+    <main className="min-h-screen bg-zinc-900 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-zinc-800 text-white shadow-xl rounded-2xl p-6 sm:p-8 text-center">
         <FaCheckCircle className="text-orange-400 text-4xl mx-auto mb-4" />
         <h1 className="text-xl font-bold mb-2">Konfirmasi Pendaftaran</h1>
