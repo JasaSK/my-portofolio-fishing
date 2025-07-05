@@ -7,6 +7,7 @@ import Link from "next/link.js";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { products } from "../data/DataProduct.js"; // Pastikan path sesuai
 import { reviews } from "../data/DataReviews.js";
+import { useEffect } from "react";
 
 export default function ProductList() {
   const [showAll, setShowAll] = useState(false);
@@ -121,9 +122,29 @@ export default function ProductList() {
   );
 }
 export function ProductListPondZone() {
-  const [showAll, setShowAll] = useState(false);
-  const visibleProducts = showAll ? products : products.slice(0, 8);
+  const [showAll, setShowAll] = useState(null); // null artinya belum dibaca
   const router = useRouter();
+
+  useEffect(() => {
+    const stored = localStorage.getItem("showAll");
+    if (stored === null) {
+      setShowAll(false); // Jika belum ada di localStorage
+    } else {
+      setShowAll(stored === "true");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (showAll !== null) {
+      localStorage.setItem("showAll", showAll.toString());
+    }
+  }, [showAll]);
+
+  if (showAll === null) {
+    return <div>Loading...</div>; // atau skeleton
+  }
+
+  const visibleProducts = showAll ? products : products.slice(0, 8);
 
   return (
     <div className="mt-10 bg-white">
@@ -217,7 +238,7 @@ export function ProductListPondZone() {
           ))}
         </div>
 
-        {!showAll && (
+        {showAll === false && (
           <div className="flex justify-center mt-10">
             <FadeInSection direction="in">
               <button
