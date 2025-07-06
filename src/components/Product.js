@@ -93,7 +93,7 @@ export default function ProductList() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
           <FadeInSection direction="left">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
-              Customers also purchased
+              Spot Pemancingan Lain yang Populer{" "}
             </h2>
           </FadeInSection>
           <FadeInSection direction="right">
@@ -145,7 +145,7 @@ export function ProductListPondZone() {
         <div className="mb-6">
           <FadeInSection direction="left">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
-              Customers also purchased
+              Lokasi Rekomendasi{" "}
             </h2>
           </FadeInSection>
         </div>
