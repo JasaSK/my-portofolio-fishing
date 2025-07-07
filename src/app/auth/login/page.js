@@ -3,8 +3,36 @@
 import Image from "next/image";
 import PasswordInput from "../../../components/Input.js";
 import FadeInSection from "../../../components/FadeInSection.js";
+import { login } from "../../../services/authService.js";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const loadingToast = toast.loading("Sedang login...");
+    try {
+      const res = await login({ email, password });
+      toast.success("Login sukses!", { id: loadingToast });
+      console.log(res);
+    } catch (err) {
+      const data = err.response?.data;
+      let message = data?.message || "Terjadi kesalahan saat login.";
+
+      if (data?.errors) {
+        const allErrors = Object.values(data.errors).flat();
+        if (allErrors.length > 0) {
+          message = allErrors[0];
+        }
+      }
+
+      toast.error(`Login gagal: ${message}`, { id: loadingToast });
+    }
+  };
+
   return (
     <FadeInSection direction="in">
       <main className="min-h-screen bg-zinc-900 flex items-center justify-center px-4">
@@ -37,7 +65,7 @@ export default function Login() {
             <hr className="flex-grow border-zinc-600" />
           </div>
 
-          <form action="/" className="space-y-5">
+          <form onSubmit={handleLogin} className="space-y-5">
             <div>
               <label
                 htmlFor="email"
@@ -48,12 +76,20 @@ export default function Login() {
               <input
                 id="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 className="w-full px-4 py-3 border border-zinc-600 bg-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm text-white placeholder-zinc-400"
+                required
               />
             </div>
 
-            <PasswordInput dark />
+            <PasswordInput
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              dark={true}
+              required
+            />
 
             <div className="flex justify-between items-center text-sm">
               <label className="flex items-center">

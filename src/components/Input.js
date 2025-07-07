@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 
-export default function PasswordInput({ dark = false }) {
+export default function PasswordInput({
+  value,
+  onChange,
+  name = "password",
+  dark = false,
+  required = false,
+  placeholder = "Enter your password",
+}) {
   const [showPassword, setShowPassword] = useState(false);
 
   const baseInputClass =
@@ -16,7 +23,7 @@ export default function PasswordInput({ dark = false }) {
   return (
     <div className="text-start">
       <label
-        htmlFor="password"
+        htmlFor={name}
         className={`mb-2 block text-sm ${
           dark ? "text-zinc-200" : "text-gray-900"
         }`}
@@ -25,9 +32,13 @@ export default function PasswordInput({ dark = false }) {
       </label>
       <div className="relative">
         <input
-          id="password"
+          id={name}
+          name={name}
           type={showPassword ? "text" : "password"}
-          placeholder="Enter your password"
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          required={required}
           className={`${baseInputClass} ${dark ? darkStyle : lightStyle}`}
         />
         <button
