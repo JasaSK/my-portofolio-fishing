@@ -6,10 +6,12 @@ import FadeInSection from "../../../components/FadeInSection.js";
 import { login } from "../../../services/authService.js";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ export default function Login() {
     try {
       const res = await login({ email, password });
       toast.success("Login sukses!", { id: loadingToast });
-      console.log(res);
+      router.push("/main/home");
     } catch (err) {
       const data = err.response?.data;
       let message = data?.message || "Terjadi kesalahan saat login.";

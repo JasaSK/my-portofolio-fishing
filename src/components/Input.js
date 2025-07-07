@@ -5,10 +5,9 @@ import { useState } from "react";
 export default function PasswordInput({
   value,
   onChange,
-  name = "password",
+  name,
   dark = false,
-  required = false,
-  placeholder = "Enter your password",
+  label = "Password",
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -23,24 +22,24 @@ export default function PasswordInput({
   return (
     <div className="text-start">
       <label
-        htmlFor={name}
+        htmlFor={name || "password"}
         className={`mb-2 block text-sm ${
           dark ? "text-zinc-200" : "text-gray-900"
         }`}
       >
-        Password*
+        {label}*
       </label>
       <div className="relative">
         <input
-          id={name}
-          name={name}
+          id={name || "password"}
+          name={name || "password"} // ini penting!
           type={showPassword ? "text" : "password"}
-          placeholder={placeholder}
+          placeholder="Enter your password"
+          className={`${baseInputClass} ${dark ? darkStyle : lightStyle}`}
           value={value}
           onChange={onChange}
-          required={required}
-          className={`${baseInputClass} ${dark ? darkStyle : lightStyle}`}
         />
+
         <button
           type="button"
           onClick={() => setShowPassword((prev) => !prev)}

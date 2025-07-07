@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaCheckCircle } from "react-icons/fa";
+import { verifyCode, resendCode } from "../../../services/authService";
 
 export default function ConfirmationPage() {
   const [code, setCode] = useState("");
@@ -10,7 +11,17 @@ export default function ConfirmationPage() {
   const [resendMessage, setResendMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [cooldown, setCooldown] = useState(30);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  console.log("Verifikasi dengan:", { email, code });
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("pendingEmail");
+    if (storedEmail) {
+      setEmail(storedEmail);
+    }
+  }, []);
 
   useEffect(() => {
     let timer;
@@ -20,21 +31,39 @@ export default function ConfirmationPage() {
     return () => clearTimeout(timer);
   }, [cooldown]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (code === "123456") {
-      setSuccessMessage("Kode berhasil diverifikasi!");
+    setError("");
+    setSuccessMessage("");
+    setLoading(true);
+
+    try {
+      const response = await verifyCode({ email, code });
+      setSuccessMessage(response.message);
+      localStorage.removeItem("pendingEmail");
       setTimeout(() => {
-        router.push("/main/home");
-      }, 2000); // Delay 2 detik sebelum redirect
-    } else {
-      setError("Kode konfirmasi salah. Coba lagi.");
+        router.push("/auth/login");
+      }, 2000);
+    } catch (err) {
+      setError(err.message || "Kode verifikasi salah.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleResend = () => {
-    setResendMessage("Kode verifikasi telah dikirim ulang.");
+  const handleResend = async () => {
     setCooldown(30);
+    setResendMessage("");
+
+    try {
+      const response = await resendCode(email);
+      console.log("Kode berhasil dikirim ulang:", response);
+      setResendMessage(response.message || "Kode verifikasi dikirim ulang.");
+    } catch (err) {
+      console.error("Gagal mengirim ulang kode:", err);
+      setResendMessage("Gagal mengirim ulang kode.");
+    }
+
     setTimeout(() => setResendMessage(""), 4000);
   };
 
@@ -44,11 +73,10 @@ export default function ConfirmationPage() {
         <FaCheckCircle className="text-orange-400 text-4xl mx-auto mb-4" />
         <h1 className="text-xl font-bold mb-2">Konfirmasi Pendaftaran</h1>
         <p className="text-zinc-300 mb-6 text-sm">
-          Kami telah mengirimkan kode ke email atau nomor kamu. Masukkan kode
-          tersebut untuk menyelesaikan pendaftaran.
+          Kami telah mengirimkan kode ke email kamu. Masukkan kode tersebut
+          untuk menyelesaikan pendaftaran.
         </p>
 
-        {/* Alert Sukses */}
         {successMessage && (
           <div className="mb-4 bg-green-500/10 text-green-400 border border-green-600 px-4 py-3 rounded-md text-sm font-medium">
             {successMessage}
@@ -67,9 +95,12 @@ export default function ConfirmationPage() {
 
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white font-semibold py-3 rounded-xl hover:bg-orange-600 transition"
+            disabled={loading}
+            className={`w-full bg-orange-500 text-white font-semibold py-3 rounded-xl transition ${
+              loading ? "opacity-70 cursor-wait" : "hover:bg-orange-600"
+            }`}
           >
-            Verifikasi
+            {loading ? "Memverifikasi..." : "Verifikasi"}
           </button>
         </form>
 
