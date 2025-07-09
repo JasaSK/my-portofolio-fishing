@@ -13,6 +13,8 @@ export default function ConfirmationPage() {
   const [cooldown, setCooldown] = useState(30);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
+
   const router = useRouter();
   console.log("Verifikasi dengan:", { email, code });
 
@@ -31,27 +33,39 @@ export default function ConfirmationPage() {
     return () => clearTimeout(timer);
   }, [cooldown]);
 
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        router.push("/auth/login");
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
-    setLoading(true);
 
+    if (!code || code.trim().length < 4) {
+      setError("Kode verifikasi minimal 4 karakter.");
+      return;
+    }
+
+    setLoading(true);
     try {
       const response = await verifyCode({ email, code });
       setSuccessMessage(response.message);
       localStorage.removeItem("pendingEmail");
-      setTimeout(() => {
-        router.push("/auth/login");
-      }, 2000);
     } catch (err) {
-      setError(err.message || "Kode verifikasi salah.");
+      setError(err.message || "Kode verifikasi salah atau sudah kadaluarsa.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleResend = async () => {
+    setResendLoading(true);
     setCooldown(30);
     setResendMessage("");
 
@@ -62,9 +76,10 @@ export default function ConfirmationPage() {
     } catch (err) {
       console.error("Gagal mengirim ulang kode:", err);
       setResendMessage("Gagal mengirim ulang kode.");
+    } finally {
+      setResendLoading(false);
+      setTimeout(() => setResendMessage(""), 4000);
     }
-
-    setTimeout(() => setResendMessage(""), 4000);
   };
 
   return (
@@ -72,14 +87,19 @@ export default function ConfirmationPage() {
       <div className="w-full max-w-md bg-zinc-800 text-white shadow-xl rounded-2xl p-6 sm:p-8 text-center">
         <FaCheckCircle className="text-orange-400 text-4xl mx-auto mb-4" />
         <h1 className="text-xl font-bold mb-2">Konfirmasi Pendaftaran</h1>
+        <p className="text-zinc-300 text-sm mb-1">
+          Kode verifikasi dikirim ke:
+        </p>
+        <p className="text-white font-medium text-sm mb-4">{email}</p>
+
         <p className="text-zinc-300 mb-6 text-sm">
-          Kami telah mengirimkan kode ke email kamu. Masukkan kode tersebut
-          untuk menyelesaikan pendaftaran.
+          Masukkan kode yang dikirim ke email kamu untuk menyelesaikan
+          pendaftaran.
         </p>
 
         {successMessage && (
           <div className="mb-4 bg-green-500/10 text-green-400 border border-green-600 px-4 py-3 rounded-md text-sm font-medium">
-            {successMessage}
+            {successMessage} Mengarahkan ke login...
           </div>
         )}
 
@@ -89,6 +109,10 @@ export default function ConfirmationPage() {
             placeholder="Masukkan kode"
             value={code}
             onChange={(e) => setCode(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSubmit(e);
+            }}
+            autoFocus
             className="w-full px-4 py-3 border border-zinc-600 bg-zinc-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm placeholder-zinc-400"
           />
           {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -108,20 +132,35 @@ export default function ConfirmationPage() {
           Tidak menerima kode?{" "}
           <button
             onClick={handleResend}
-            disabled={cooldown > 0}
+            disabled={cooldown > 0 || resendLoading}
             className={`font-semibold ${
-              cooldown > 0
+              cooldown > 0 || resendLoading
                 ? "text-zinc-500 cursor-not-allowed"
                 : "text-orange-400 hover:underline"
             }`}
           >
-            Kirim Ulang {cooldown > 0 && `(${cooldown}s)`}
+            {resendLoading
+              ? "Mengirim..."
+              : `Kirim Ulang ${cooldown > 0 ? `(${cooldown}s)` : ""}`}
           </button>
         </div>
 
         {resendMessage && (
           <p className="mt-2 text-sm text-green-400">{resendMessage}</p>
         )}
+
+        <p className="mt-4 text-sm text-zinc-400">
+          Salah email?{" "}
+          <button
+            onClick={() => {
+              localStorage.removeItem("pendingEmail");
+              router.push("/auth/register");
+            }}
+            className="text-orange-400 font-semibold hover:underline"
+          >
+            Ganti Email
+          </button>
+        </p>
       </div>
     </main>
   );
