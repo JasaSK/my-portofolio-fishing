@@ -7,6 +7,7 @@ import { register } from "../../../services/authService.js";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link.js";
 
 export default function Register() {
   const router = useRouter();
@@ -156,9 +157,9 @@ export default function Register() {
 
               <label htmlFor="agree" className="leading-snug">
                 Saya setuju dengan{" "}
-                <a href="#" className="text-orange-400 hover:underline">
+                <Link href="/auth/terms" className="text-orange-400 hover:underline">
                   Syarat & Ketentuan
-                </a>
+                </Link>
               </label>
             </div>
 
