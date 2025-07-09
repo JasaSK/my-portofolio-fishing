@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://my-portofolio-backend-fishing-production.up.railway.app/api",
-  withCredentials: true,  
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  withCredentials: true,
 });
 
 instance.interceptors.request.use(
