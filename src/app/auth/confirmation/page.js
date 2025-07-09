@@ -20,10 +20,13 @@ export default function ConfirmationPage() {
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("pendingEmail");
-    if (storedEmail) {
+    if (!storedEmail) {
+      toast.error("Email tidak ditemukan, silakan daftar ulang.");
+      router.push("/auth/register");
+    } else {
       setEmail(storedEmail);
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     let timer;
