@@ -4,6 +4,7 @@ import MobileMenu from "./MobileMenu";
 import Link from "next/link";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import MiniCartDropdown from "./MiniCartDropdown";
+import { useRouter } from "next/navigation";
 
 export default function Navbar({
   bg = "bg-white",
@@ -17,6 +18,31 @@ export default function Navbar({
   const [lastScrollY, setLastScrollY] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [showCart, setShowCart] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    setIsLoggedIn(!!token); // true kalau ada token
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    setIsLoggedIn(false);
+    router.push("/auth/login"); // Redirect ke login
+  };
+
+  useEffect(() => {
+    const checkLogin = () => {
+      const token = localStorage.getItem("authToken");
+      setIsLoggedIn(!!token);
+    };
+
+    checkLogin();
+
+    window.addEventListener("storage", checkLogin); // kalau pakai lebih dari 1 tab
+    return () => window.removeEventListener("storage", checkLogin);
+  }, []);
+
   let cartTimeout;
   const handleEnter = () => {
     clearTimeout(cartTimeout);
@@ -69,7 +95,6 @@ export default function Navbar({
         scrollEffect && !showNavbar ? "-translate-y-full" : "translate-y-0"
       } ${className}`}
     >
-      {/* Topbar */}
       {/* TOPBAR */}
       <div className="hidden md:block bg-gray-900 text-gray-100 text-sm">
         <div className="container mx-auto flex items-center justify-between px-4 py-2">
@@ -85,18 +110,29 @@ export default function Navbar({
             </Link>
           </div>
           <div className="flex gap-4">
-            <Link
-              href="/auth/login"
-              className="hover:text-orange-400 transition"
-            >
-              Masuk
-            </Link>
-            <Link
-              href="/auth/register"
-              className="hover:text-orange-400 transition"
-            >
-              Daftar
-            </Link>
+            {isLoggedIn ? (
+              <button
+                onClick={handleLogout}
+                className="hover:text-orange-400 transition"
+              >
+                Keluar
+              </button>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="hover:text-orange-400 transition"
+                >
+                  Masuk
+                </Link>
+                <Link
+                  href="/auth/register"
+                  className="hover:text-orange-400 transition"
+                >
+                  Daftar
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -174,15 +210,27 @@ export default function Navbar({
           </div>
 
           {/* Login button */}
-          <Link
-            href="/auth/login"
-            className="hidden lg:inline-flex items-center gap-1 text-sm font-semibold text-gray-700 hover:text-orange-500 transition group"
-          >
-            Login
-            <span className="group-hover:translate-x-1 transition-transform">
-              →
-            </span>
-          </Link>
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="hidden lg:inline-flex items-center gap-1 text-sm font-semibold text-gray-700 hover:text-orange-500 transition group"
+            >
+              Logout
+              <span className="group-hover:translate-x-1 transition-transform">
+                ↩
+              </span>
+            </button>
+          ) : (
+            <Link
+              href="/auth/login"
+              className="hidden lg:inline-flex items-center gap-1 text-sm font-semibold text-gray-700 hover:text-orange-500 transition group"
+            >
+              Login
+              <span className="group-hover:translate-x-1 transition-transform">
+                →
+              </span>
+            </Link>
+          )}
 
           {/* Hamburger menu */}
           <div className="lg:hidden">

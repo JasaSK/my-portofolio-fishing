@@ -4,20 +4,70 @@ import Image from "next/image";
 import PasswordInput from "../../../components/Input.js";
 import FadeInSection from "../../../components/FadeInSection.js";
 import { login } from "../../../services/authService.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link.js";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [history, setHistory] = useState([]);
   const router = useRouter();
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("loginHistory")) || [];
+    setHistory(stored.slice(-5).reverse());
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedToken = localStorage.getItem("authToken");
+      if (storedToken) {
+        router.push("/main/home");
+      }
+    }
+  }, [router]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const loadingToast = toast.loading("Sedang login...");
     try {
-      const res = await login({ email, password });
+      const token = await login({ email, password });
+
+      // ✅ Selalu simpan token agar tetap login
+      localStorage.setItem("authToken", token);
+
+      // ✅ Hanya simpan riwayat login jika "Ingat saya" dicentang
+      if (rememberMe) {
+        let loginHistory =
+          JSON.parse(localStorage.getItem("loginHistory")) || [];
+
+        const existingIndex = loginHistory.findIndex(
+          (item) => item.email === email
+        );
+
+        const newEntry = {
+          email,
+          time: new Date().toISOString(),
+          token,
+        };
+
+        if (existingIndex !== -1) {
+          loginHistory[existingIndex] = newEntry;
+        } else {
+          loginHistory.push(newEntry);
+        }
+
+        loginHistory = loginHistory
+          .sort((a, b) => new Date(b.time) - new Date(a.time))
+          .slice(0, 5);
+
+        localStorage.setItem("loginHistory", JSON.stringify(loginHistory));
+        setHistory(loginHistory);
+      }
+
       toast.success("Login sukses!", { id: loadingToast });
       router.push("/main/home");
     } catch (err) {
@@ -38,18 +88,20 @@ export default function Login() {
   return (
     <FadeInSection direction="in">
       <main className="min-h-screen bg-zinc-900 flex items-center justify-center px-4">
-        <div className="w-full max-w-md bg-zinc-800 text-white shadow-xl rounded-2xl p-6 sm:p-8">
-          <h2 className="text-3xl font-bold text-orange-400 text-center mb-2">
-            Selamat Datang
-          </h2>
-          <p className="text-zinc-300 text-center mb-6 text-sm">
-            Masuk ke akun Anda di{" "}
-            <span className="font-semibold text-orange-500">PondZone</span>
-          </p>
+        <div className="w-full max-w-md bg-zinc-800 text-white shadow-xl rounded-2xl p-6 sm:p-8 space-y-6">
+          <div className="text-center space-y-2">
+            <h2 className="text-3xl font-bold text-orange-400">
+              Selamat Datang
+            </h2>
+            <p className="text-zinc-300 text-sm">
+              Masuk ke akun Anda di{" "}
+              <span className="font-semibold text-orange-500">PondZone</span>
+            </p>
+          </div>
 
           <button
             type="button"
-            className="flex items-center justify-center w-full py-3 mb-6 rounded-xl border border-zinc-600 bg-zinc-700 hover:bg-zinc-600 transition text-sm text-white font-medium"
+            className="flex items-center justify-center w-full py-3 rounded-xl border border-zinc-600 bg-zinc-700 hover:bg-zinc-600 transition text-sm text-white font-medium"
           >
             <Image
               src="/images/google.png"
@@ -61,13 +113,13 @@ export default function Login() {
             Masuk dengan Google
           </button>
 
-          <div className="flex items-center my-6">
+          <div className="flex items-center">
             <hr className="flex-grow border-zinc-600" />
             <span className="mx-4 text-zinc-400 text-sm">atau</span>
             <hr className="flex-grow border-zinc-600" />
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-5">
+          <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label
                 htmlFor="email"
@@ -98,12 +150,14 @@ export default function Login() {
                 <input
                   type="checkbox"
                   className="w-4 h-4 mr-2 text-orange-500 bg-zinc-700 border-zinc-500 focus:ring-orange-500 rounded"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
                 />
                 <span className="text-zinc-300">Ingat saya</span>
               </label>
-              <a href="#" className="text-orange-400 hover:underline">
+              <Link href="/auth/forgot-password" className="text-orange-400 hover:underline">
                 Lupa password?
-              </a>
+              </Link>
             </div>
 
             <button
@@ -114,7 +168,71 @@ export default function Login() {
             </button>
           </form>
 
-          <p className="text-center text-sm text-zinc-400 mt-6">
+          {history.length > 0 && (
+            <div className="text-sm text-zinc-300">
+              <h3 className="text-orange-400 font-semibold mb-2">
+                Riwayat Login
+              </h3>
+              <div className="max-h-32 overflow-y-auto space-y-2">
+                {history.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between gap-4 bg-zinc-800 border border-zinc-700 px-4 py-3 rounded-xl hover:shadow-md transition"
+                  >
+                    <div className="flex flex-col text-sm">
+                      <div className="flex items-center gap-2 text-white font-medium">
+                        <svg
+                          className="w-4 h-4 text-orange-400"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16 12H8m8 0l-4-4m4 4l-4 4"
+                          />
+                        </svg>
+                        <span>{item.email}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-zinc-400 mt-1">
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <span>{new Date(item.time).toLocaleString()}</span>
+                      </div>
+                    </div>
+
+                    {item.token && (
+                      <button
+                        onClick={() => {
+                          localStorage.setItem("authToken", item.token);
+                          toast.success("Login cepat berhasil!");
+                          router.push("/main/home");
+                        }}
+                        className="text-xs px-3 py-1 rounded-md text-orange-400 border border-orange-400 hover:bg-orange-500 hover:text-white transition"
+                      >
+                        Login Cepat
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <p className="text-center text-sm text-zinc-400">
             Belum punya akun?{" "}
             <a
               href="/auth/register"

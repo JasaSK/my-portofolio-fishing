@@ -1,8 +1,25 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function MobileMenu({ isOpen, onClose }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    setIsLoggedIn(false);
+    onClose(); // tutup menu
+    router.push("/auth/login"); // redirect ke login
+  };
+
   return (
     <>
       {/* Overlay Backdrop */}
@@ -69,13 +86,33 @@ export default function MobileMenu({ isOpen, onClose }) {
                 </Link>
               ))}
             </div>
+
             <div className="py-6">
-              <Link
-                href="/auth/login"
-                className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
-              >
-                Log in
-              </Link>
+              {isLoggedIn ? (
+                <button
+                  onClick={handleLogout}
+                  className="-mx-3 w-full text-left rounded-lg px-3 py-2.5 text-base font-semibold text-red-600 hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  href="/auth/login"
+                  onClick={onClose}
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  Log in
+                </Link>
+              )}
+              {!isLoggedIn && (
+                <Link
+                  href="/auth/register"
+                  onClick={onClose}
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  Daftar
+                </Link>
+              )}
             </div>
           </div>
         </div>
