@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://your-backend-production.up.railway.app/api",
+  baseURL: "https://https://my-portofolio-backend-fishing-production.up.railway.app//api",
   withCredentials: true,  
 });
 
