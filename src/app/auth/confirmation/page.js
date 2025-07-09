@@ -10,7 +10,7 @@ export default function ConfirmationPage() {
   const [error, setError] = useState("");
   const [resendMessage, setResendMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [cooldown, setCooldown] = useState(30);
+  const [cooldown, setCooldown] = useState(60);
   const [redirectCountdown, setRedirectCountdown] = useState(2);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -80,7 +80,7 @@ export default function ConfirmationPage() {
 
   const handleResend = async () => {
     setResendLoading(true);
-    setCooldown(30);
+    setCooldown(60);
     setResendMessage("");
 
     try {

@@ -87,8 +87,8 @@ export default function Login() {
 
   return (
     <FadeInSection direction="in">
-      <main className="min-h-screen bg-zinc-900 flex items-center justify-center px-4">
-        <div className="w-full max-w-md bg-zinc-800 text-white shadow-xl rounded-2xl p-6 sm:p-8 space-y-6">
+      <main className="min-h-screen bg-zinc-900 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 overflow-auto">
+        <div className="w-full max-w-md bg-zinc-800 text-white shadow-xl rounded-2xl p-4 sm:p-6 md:p-8 space-y-6">
           <div className="text-center space-y-2">
             <h2 className="text-3xl font-bold text-orange-400">
               Selamat Datang
@@ -155,14 +155,16 @@ export default function Login() {
                 />
                 <span className="text-zinc-300">Ingat saya</span>
               </label>
-              <Link href="/auth/forgot-password" className="text-orange-400 hover:underline">
+              <Link
+                href="/auth/forgot-password"
+                className="text-orange-400 hover:underline"
+              >
                 Lupa password?
               </Link>
             </div>
-
             <button
               type="submit"
-              className="w-full bg-orange-500 text-white font-semibold py-3 rounded-xl hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 transition"
+              className="w-full bg-orange-500 text-white font-semibold py-3 rounded-xl text-sm sm:text-base hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 transition"
             >
               Masuk
             </button>
