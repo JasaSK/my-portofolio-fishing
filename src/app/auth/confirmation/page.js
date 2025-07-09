@@ -11,12 +11,12 @@ export default function ConfirmationPage() {
   const [resendMessage, setResendMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [cooldown, setCooldown] = useState(30);
+  const [redirectCountdown, setRedirectCountdown] = useState(2);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
 
   const router = useRouter();
-  console.log("Verifikasi dengan:", { email, code });
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("pendingEmail");
@@ -28,19 +28,30 @@ export default function ConfirmationPage() {
   useEffect(() => {
     let timer;
     if (cooldown > 0) {
-      timer = setTimeout(() => setCooldown(cooldown - 1), 1000);
+      timer = setTimeout(() => setCooldown((prev) => prev - 1), 1000);
     }
     return () => clearTimeout(timer);
   }, [cooldown]);
 
   useEffect(() => {
     if (successMessage) {
-      const timer = setTimeout(() => {
+      let redirectInterval;
+      let redirectTimeout;
+
+      redirectInterval = setInterval(() => {
+        setRedirectCountdown((prev) => prev - 1);
+      }, 1000);
+
+      redirectTimeout = setTimeout(() => {
         router.push("/auth/login");
-      }, 2000);
-      return () => clearTimeout(timer);
+      }, redirectCountdown * 1000);
+
+      return () => {
+        clearInterval(redirectInterval);
+        clearTimeout(redirectTimeout);
+      };
     }
-  }, [successMessage]);
+  }, [successMessage, redirectCountdown, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +69,7 @@ export default function ConfirmationPage() {
       setSuccessMessage(response.message);
       localStorage.removeItem("pendingEmail");
     } catch (err) {
-      setError(err.message || "Kode verifikasi salah atau sudah kadaluarsa.");
+      setError(err?.message || "Kode verifikasi salah atau sudah kadaluarsa.");
     } finally {
       setLoading(false);
     }
@@ -71,7 +82,6 @@ export default function ConfirmationPage() {
 
     try {
       const response = await resendCode(email);
-      console.log("Kode berhasil dikirim ulang:", response);
       setResendMessage(response.message || "Kode verifikasi dikirim ulang.");
     } catch (err) {
       console.error("Gagal mengirim ulang kode:", err);
@@ -87,6 +97,7 @@ export default function ConfirmationPage() {
       <div className="w-full max-w-md bg-zinc-800 text-white shadow-xl rounded-2xl p-6 sm:p-8 text-center">
         <FaCheckCircle className="text-orange-400 text-4xl mx-auto mb-4" />
         <h1 className="text-xl font-bold mb-2">Konfirmasi Pendaftaran</h1>
+
         <p className="text-zinc-300 text-sm mb-1">
           Kode verifikasi dikirim ke:
         </p>
@@ -99,7 +110,10 @@ export default function ConfirmationPage() {
 
         {successMessage && (
           <div className="mb-4 bg-green-500/10 text-green-400 border border-green-600 px-4 py-3 rounded-md text-sm font-medium">
-            {successMessage} Mengarahkan ke login...
+            <p>{successMessage}</p>
+            <p className="text-xs text-green-300 mt-1">
+              Mengarahkan ke login dalam {redirectCountdown} detik...
+            </p>
           </div>
         )}
 
