@@ -75,7 +75,7 @@ export default function Sidebar() {
         <Icon className="h-5 w-5 shrink-0" />
         {!collapsed && <span className="truncate leading-tight">{label}</span>}
         {collapsed && (
-          <span className="pointer-events-none absolute left-full ml-3 translate-y-[-50%] rounded bg-slate-800 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-all group-hover:translate-y-0 group-hover:opacity-100">
+          <span className="pointer-events-none absolute left-full top-1/2 ml-2 -translate-y-1/2 min-w-[90px] rounded bg-slate-800 px-2 py-1 text-xs text-white opacity-0 shadow-md transition-all group-hover:opacity-100 whitespace-nowrap z-50">
             {label}
           </span>
         )}
@@ -84,7 +84,7 @@ export default function Sidebar() {
   };
 
   const Inner = (mobile = false) => (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col pt-6">
       <div
         className={classNames(
           "mx-4 mb-6 flex items-center border-b border-white/10 pb-5",
@@ -116,7 +116,7 @@ export default function Sidebar() {
           </button>
         )}
       </div>
-      <nav className="scrollbar-hide flex-1 space-y-1 overflow-y-auto px-2">
+      <nav className="scrollbar-hide flex-1 space-y-1 overflow-y-auto px-3">
         {MENUS.map((item) => (
           <Item key={item.href} {...item} />
         ))}
@@ -140,12 +140,12 @@ export default function Sidebar() {
         className={classNames(
           "fixed inset-y-0 left-0 z-40 hidden bg-gradient-to-b from-slate-900/95 to-slate-800/95 shadow-xl backdrop-blur lg:flex",
           "transition-[width] duration-300",
-          collapsed ? "w-20" : "w-64"
+          collapsed ? "w-20" : "w-60" // ✅ Lebih ramping, tetap cukup
         )}
       >
         {Inner(false)}
       </aside>
-      <header className="lg:hidden z-40 flex items-center justify-between bg-slate-900/95 px-4 py-3 shadow-md backdrop-blur">
+      <header className="lg:hidden z-40 flex items-center justify-between bg-slate-900/95 px-4 pt-8 pb-4 shadow-md backdrop-blur">
         <button
           onClick={openDrawer}
           className="rounded-md bg-white/5 p-2 text-orange-400 hover:bg-orange-500 hover:text-white"
