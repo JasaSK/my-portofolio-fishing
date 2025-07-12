@@ -75,7 +75,11 @@ export default function ConfirmationPage() {
       await verifyCode({ email, code });
 
       toast.success("Verifikasi berhasil!");
-      router.push("/berhasil");
+      localStorage.removeItem("pendingUsername");
+      localStorage.removeItem("pendingPassword");
+      localStorage.removeItem("pendingConfirmPassword");
+      localStorage.removeItem("pendingEmail");
+      router.push("/auth/login");
     } catch (err) {
       const res = err.response;
 
@@ -199,7 +203,7 @@ export default function ConfirmationPage() {
           <button
             onClick={handleResend}
             disabled={cooldown > 0 || resendLoading}
-            className={`font-semibold ${
+            className={`cursor-pointer font-semibold ${
               cooldown > 0 || resendLoading
                 ? "text-zinc-500 cursor-not-allowed"
                 : "text-orange-400 hover:underline"
