@@ -66,6 +66,10 @@ export default function Register() {
       });
 
       toast.success("Registrasi berhasil!");
+      localStorage.setItem("pendingUsername", name);
+      localStorage.setItem("pendingPassword", password);
+      localStorage.setItem("pendingConfirmPassword", confirmPassword);
+
       localStorage.setItem("pendingEmail", email);
       router.push("/auth/confirmation");
     } catch (err) {
@@ -76,6 +80,19 @@ export default function Register() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const savedName = localStorage.getItem("pendingUsername");
+    const savedPassword = localStorage.getItem("pendingPassword");
+    const savedConfirmPassword = localStorage.getItem("pendingConfirmPassword");
+
+    if (savedName) setName(savedName);
+    if (savedPassword) {
+      setPassword(savedPassword);
+      setPasswordStrength(zxcvbn(savedPassword).score);
+    }
+    if (savedConfirmPassword) setConfirmPassword(savedConfirmPassword);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
