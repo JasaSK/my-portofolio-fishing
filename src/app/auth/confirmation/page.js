@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaCheckCircle } from "react-icons/fa";
 import { verifyCode, resendCode } from "../../../services/authService";
+import Spinner from "../../../components/Spinner";
+import toast from "react-hot-toast";
 
 export default function ConfirmationPage() {
   const [code, setCode] = useState("");
@@ -15,6 +17,7 @@ export default function ConfirmationPage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
 
   const router = useRouter();
 
@@ -58,26 +61,38 @@ export default function ConfirmationPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccessMessage("");
 
-    if (!code || code.trim().length < 4) {
-      setError("Kode verifikasi minimal 4 karakter.");
-      return;
+    if (!code) {
+      return toast.error("Kode tidak boleh kosong!");
+    }
+
+    if (code.length !== 6) {
+      return toast.error("Kode harus 6 digit!");
     }
 
     setLoading(true);
     try {
-      const response = await verifyCode({ email, code });
-      setSuccessMessage(response.message);
-      localStorage.removeItem("pendingEmail");
+      await verifyCode({ email, code });
+
+      toast.success("Verifikasi berhasil!");
+      router.push("/berhasil");
     } catch (err) {
-      setError(err?.message || "Kode verifikasi salah atau sudah kadaluarsa.");
+      const res = err.response;
+
+      if (res?.data?.errors) {
+        // Jika ada banyak error field
+        const messages = Object.values(res.data.errors).flat();
+        messages.forEach((msg) => toast.error(msg));
+      } else {
+        // Jika hanya 1 pesan umum
+        toast.error(res?.data?.message || "Terjadi kesalahan saat verifikasi.");
+      }
+
+      setError("Kode salah atau tidak valid."); // opsional, untuk ditampilkan di UI juga
     } finally {
       setLoading(false);
     }
   };
-
   const handleResend = async () => {
     setResendLoading(true);
     setCooldown(60);
@@ -95,6 +110,13 @@ export default function ConfirmationPage() {
     }
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setPageLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (pageLoading) return <Spinner />;
   return (
     <main className="min-h-screen bg-zinc-900 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-zinc-800 text-white shadow-xl rounded-2xl p-6 sm:p-8 text-center">
@@ -125,7 +147,11 @@ export default function ConfirmationPage() {
             type="text"
             placeholder="Masukkan kode"
             value={code}
-            onChange={(e) => setCode(e.target.value)}
+            // reset error saat user mengetik ulang
+            onChange={(e) => {
+              setCode(e.target.value);
+              setError("");
+            }}
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSubmit(e);
             }}
@@ -133,14 +159,37 @@ export default function ConfirmationPage() {
             className="w-full px-4 py-3 border border-zinc-600 bg-zinc-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm placeholder-zinc-400"
           />
           {error && <p className="text-red-500 text-sm">{error}</p>}
-
           <button
             type="submit"
             disabled={loading}
-            className={`w-full bg-orange-500 text-white font-semibold py-3 rounded-xl transition ${
-              loading ? "opacity-70 cursor-wait" : "hover:bg-orange-600"
+            className={`w-full flex items-center justify-center gap-2 bg-orange-500 text-white font-semibold py-3 rounded-xl transition ${
+              loading
+                ? "opacity-70 cursor-wait"
+                : "hover:bg-orange-600 cursor-pointer"
             }`}
           >
+            {loading && (
+              <svg
+                className="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                />
+              </svg>
+            )}
             {loading ? "Memverifikasi..." : "Verifikasi"}
           </button>
         </form>
@@ -173,7 +222,7 @@ export default function ConfirmationPage() {
               localStorage.removeItem("pendingEmail");
               router.push("/auth/register");
             }}
-            className="text-orange-400 font-semibold hover:underline"
+            className="cursor-pointer text-orange-400 font-semibold hover:underline"
           >
             Ganti Email
           </button>
