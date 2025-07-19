@@ -1,146 +1,99 @@
 "use client";
 import Image from "next/image";
-import FadeInSection from "../../../components/FadeInSection.js";
+import { useState } from "react";
 
-export default function Profile() {
+export default function UserProfile() {
+  const [user, setUser] = useState({
+    name: "Budi Santoso",
+    email: "budi@example.com",
+    phone: "+62 812 3456 7890",
+    membership: "Premium",
+    photo: "/images/user-avatar.png",
+    orders: [
+      { id: 1, date: "2025-07-10", spot: "PondZone A", status: "Selesai" },
+      { id: 2, date: "2025-06-28", spot: "PondZone B", status: "Batal" },
+    ],
+  });
+
+  const [imageSrc, setImageSrc] = useState(
+    user.photo || "/images/background.jpg"
+  );
   return (
-    <section className="bg-white w-full overflow-hidden">
-      <div className="flex flex-col">
-        <Image
-          src="/images/background.jpg"
-          alt="Fishing Lake Cover"
-          className="w-full h-[11rem] sm:h-[14rem] md:h-[16rem] lg:h-[18rem] xl:h-[20rem] object-cover"
-          width={1200}
-          height={300}
-        />
+    <section className="w-full min-h-screen pt-38 pb-16 bg-white px-4">
+      <div className="max-w-4xl mx-auto py-10 px-6 bg-white rounded-xl shadow-lg">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+          <div className="relative">
+            <Image
+              src={imageSrc}
+              alt="Foto Profil Pengguna"
+              width={150}
+              height={150}
+              className="rounded-full border-4 border-blue-500 object-cover w-[120px] h-[120px] sm:w-[150px] sm:h-[150px]"
+              onError={() => setImageSrc("/images/background.jpg")}
+            />
 
-        <div className="w-[90%] sm:w-[80%] mx-auto flex flex-col sm:flex-row items-center gap-4 -mt-10 sm:-mt-14 md:-mt-18 lg:-mt-20">
-          <FadeInSection direction="in">
-            <div className="relative group">
-              <div className="backdrop-blur-md bg-white/30 dark:bg-gray-800/30 rounded-full p-[4px] shadow-md">
-                <Image
-                  src="/images/pancing1.jpg"
-                  alt="Fishing Spot Profile"
-                  width={300}
-                  height={300}
-                  className="rounded-full object-cover w-[7rem] h-[7rem] sm:w-[8rem] sm:h-[8rem] md:w-[10rem] md:h-[10rem] lg:w-[12rem] lg:h-[12rem]"
-                />
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 cursor-pointer">
-                <button
-                  onClick={() => alert("Edit Photo")}
-                  className="text-white text-xl hover:text-orange-500"
-                  title="Edit Photo"
-                >
-                  ✎
-                </button>
-              </div>
-            </div>
-          </FadeInSection>
-          <FadeInSection direction="left">
-            <h1 className="text-gray-800 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-center lg:text-left -mt-2">
-              Danau Pemancingan PondZone
-            </h1>
-          </FadeInSection>
-        </div>
-
-        <div className="w-[90%] sm:w-[92%] md:w-[90%] lg:w-[90%] xl:w-[80%] mx-auto flex flex-col gap-6 items-center mt-4">
-          <FadeInSection direction="in">
-            <p className="text-gray-700 text-sm sm:text-base text-center leading-relaxed">
-              PondZone adalah tempat pemancingan terbaik yang menawarkan suasana
-              alam yang tenang dan spot memancing yang lengkap. Cocok untuk
-              keluarga, komunitas, maupun pemancing profesional. Nikmati
-              pengalaman memancing yang menyenangkan dengan fasilitas lengkap
-              dan pelayanan ramah.
-            </p>
-          </FadeInSection>
-
-          <div className="w-full flex flex-col sm:flex-row gap-6 justify-between">
-            <div className="w-full">
-              <dl className="text-gray-700 divide-y divide-gray-200">
-                {["Jenis Spot", "Ukuran Area", "Jumlah Ikan", "Fasilitas"].map(
-                  (label, idx) => {
-                    const values = [
-                      "Danau Buatan",
-                      "2 Hektar",
-                      "5000+ ekor",
-                      "Saung, Kafe, Toilet, Musholla",
-                    ];
-                    return (
-                      <div key={idx} className="flex flex-col py-3">
-                        <FadeInSection direction="in">
-                          <dt className="mb-1 text-gray-500 text-sm sm:text-base md:text-lg">
-                            {label}
-                          </dt>
-                        </FadeInSection>
-                        <FadeInSection direction="left">
-                          <dd className="text-base sm:text-lg font-semibold">
-                            {values[idx]}
-                          </dd>
-                        </FadeInSection>
-                      </div>
-                    );
-                  }
-                )}
-              </dl>
-            </div>
-
-            <div className="w-full">
-              <dl className="text-gray-700 divide-y divide-gray-200">
-                {["Lokasi", "Telepon", "Email", "Website"].map((label, idx) => {
-                  const values = [
-                    "Depok, Jawa Barat",
-                    "+62 812 3456 7890",
-                    "info@pondzone.id",
-                    <a
-                      key="website"
-                      href="https://pondzone.id"
-                      className="hover:text-blue-500"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      https://pondzone.id
-                    </a>,
-                  ];
-                  return (
-                    <div key={idx} className="flex flex-col py-3">
-                      <FadeInSection direction="in">
-                        <dt className="mb-1 text-gray-500 text-sm sm:text-base md:text-lg">
-                          {label}
-                        </dt>
-                      </FadeInSection>
-                      <FadeInSection direction="left">
-                        <dd className="text-base sm:text-lg font-semibold">
-                          {values[idx]}
-                        </dd>
-                      </FadeInSection>
-                    </div>
-                  );
-                })}
-              </dl>
+            <button
+              onClick={() => alert("Fitur ganti foto belum aktif")}
+              className="absolute bottom-0 right-0 bg-blue-600 text-white text-xs px-2 py-1 rounded-full"
+            >
+              Ganti
+            </button>
+          </div>
+          <div className="flex flex-col gap-2 w-full">
+            <h1 className="text-2xl font-bold text-gray-800">{user.name}</h1>
+            <p className="text-gray-600">{user.email}</p>
+            <p className="text-gray-600">📞 {user.phone}</p>
+            <span className="inline-block mt-2 px-3 py-1 bg-green-100 text-green-800 rounded-full w-fit text-sm">
+              Member: {user.membership}
+            </span>
+            <div className="mt-4 flex gap-3 flex-wrap">
+              <button className="px-4 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                Edit Profil
+              </button>
+              <button className="px-4 py-2 text-sm bg-gray-300 text-black rounded-md hover:bg-gray-400">
+                Ganti Password
+              </button>
+              <button className="px-4 py-2 text-sm bg-red-500 text-white rounded-md hover:bg-red-600">
+                Logout
+              </button>
             </div>
           </div>
+        </div>
 
-          <FadeInSection direction="in">
-            <div className="w-full flex flex-col items-center gap-6 my-10">
-              <FadeInSection direction="in">
-                <h1 className="font-serif border-b-4 border-blue-900 text-black/80 text-xl sm:text-2xl lg:text-4xl w-fit">
-                  Lokasi Kami
-                </h1>
-              </FadeInSection>
-
-              <div className="w-[80vw] h-[200px] sm:h-[250px] md:h-[300px] rounded-lg overflow-hidden shadow-md">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=..."
-                  className="w-full h-full"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-            </div>
-          </FadeInSection>
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            Riwayat Pemesanan
+          </h2>
+          <div className="bg-white shadow-md rounded-lg overflow-hidden">
+            <table className="min-w-full text-left">
+              <thead className="bg-gray-100 text-gray-600">
+                <tr>
+                  <th className="px-4 py-2">Tanggal</th>
+                  <th className="px-4 py-2">Spot</th>
+                  <th className="px-4 py-2">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {user.orders.map((order) => (
+                  <tr key={order.id} className="border-b ">
+                    <td className="px-4 py-2 text-gray-600">{order.date}</td>
+                    <td className="px-4 py-2 text-gray-600">{order.spot}</td>
+                    <td className="px-4 py-2 text-gray-600">
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs ${
+                          order.status === "Selesai"
+                            ? "bg-green-200 text-green-800"
+                            : "bg-red-200 text-red-800"
+                        }`}
+                      >
+                        {order.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
