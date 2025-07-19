@@ -138,7 +138,7 @@ export default function Navbar({
       </div>
 
       {/* MAIN NAVBAR */}
-      <nav className="bg-white flex items-center justify-between flex-wrap py-4 lg:px-10 px-4 text-gray-800 shadow-sm">
+      <nav className="gap-6 bg-white flex items-center justify-between flex-wrap py-4 lg:px-10 px-4 text-gray-800 shadow-sm">
         {/* Logo */}
         <div className="flex lg:flex-1">
           <Link
