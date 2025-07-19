@@ -4,7 +4,7 @@ import FadeInSection from "../../../components/FadeInSection.js";
 
 export default function Profile() {
   return (
-    <section className="w-full overflow-hidden">
+    <section className="bg-white w-full overflow-hidden">
       <div className="flex flex-col">
         <Image
           src="/images/background.jpg"
