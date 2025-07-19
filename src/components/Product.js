@@ -7,6 +7,7 @@ import Link from "next/link";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { products } from "../data/DataProduct.js";
 import { reviews } from "../data/DataReviews.js";
+import { FaSearch, FaShoppingCart } from "react-icons/fa";
 
 function ProductCard({ product }) {
   const router = useRouter();
@@ -63,19 +64,24 @@ function ProductCard({ product }) {
 
           <div className="space-y-1">
             <p className="text-lg font-bold text-orange-600">{product.price}</p>
-            {product.status && (
-              <p
-                className={`text-xs font-semibold inline-block px-2 py-1 rounded-full
+            <div className="flex items-center justify-between">
+              {product.status && (
+                <p
+                  className={`text-xs font-semibold inline-block px-2 py-1 rounded-full
                 ${
                   product.status.toLowerCase() === "available"
                     ? "bg-green-100 text-green-700"
                     : "bg-red-100 text-red-700"
                 }
-              `}
-              >
-                {product.status}
-              </p>
-            )}
+                `}
+                >
+                  {product.status}
+                </p>
+              )}
+              <button className="cursor-pointer relative text-gray-700 hover:text-orange-500 transition">
+                <FaShoppingCart className="text-xl" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
