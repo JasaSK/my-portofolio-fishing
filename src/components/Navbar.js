@@ -211,15 +211,23 @@ export default function Navbar({
 
           {/* Login button */}
           {isLoggedIn ? (
-            <button
-              onClick={handleLogout}
-              className="hidden lg:inline-flex items-center gap-1 text-sm font-semibold text-gray-700 hover:text-orange-500 transition group"
-            >
-              Logout
-              <span className="group-hover:translate-x-1 transition-transform">
-                ↩
-              </span>
-            </button>
+            <>
+              <Link
+                href="/dashboard"
+                className="hidden lg:inline-flex items-center gap-1 text-sm font-semibold text-gray-700 hover:text-orange-500 transition group"
+              >
+                Dashboard
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="hidden lg:inline-flex items-center gap-1 text-sm font-semibold text-gray-700 hover:text-orange-500 transition group"
+              >
+                Logout
+                <span className="group-hover:translate-x-1 transition-transform">
+                  ↩
+                </span>
+              </button>
+            </>
           ) : (
             <Link
               href="/auth/login"
