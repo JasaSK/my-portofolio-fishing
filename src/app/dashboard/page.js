@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Ticket,
   CalendarCheck,
@@ -7,9 +9,31 @@ import {
   PlusCircle,
   ClipboardList,
   Users,
+  Bell,
+  MapPin,
+  BarChart2,
 } from "lucide-react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 export default function DashboardHome() {
+  const chartData = [
+    { tanggal: "13 Jul", jumlah: 12 },
+    { tanggal: "14 Jul", jumlah: 18 },
+    { tanggal: "15 Jul", jumlah: 10 },
+    { tanggal: "16 Jul", jumlah: 22 },
+    { tanggal: "17 Jul", jumlah: 15 },
+    { tanggal: "18 Jul", jumlah: 27 },
+    { tanggal: "19 Jul", jumlah: 20 },
+  ];
+
   return (
     <>
       {/* Section: Welcome */}
@@ -29,32 +53,35 @@ export default function DashboardHome() {
       </section>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-12 pb-24">
-        {/* Section: Statistik */}
+        {/* Section: Notifikasi */}
+        <section>
+          <div className="bg-gray-800 p-4 sm:p-5 rounded-xl shadow flex items-center gap-4 text-sm text-orange-300">
+            <Bell className="w-5 h-5 shrink-0" />
+            <div className="space-y-1">
+              <p>3 tempat menunggu verifikasi penyedia baru.</p>
+              <p>Kolam C dijadwalkan tutup untuk perawatan pada 21 Juli.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Section: Statistik Hari Ini */}
         <section>
           <h3 className="text-lg sm:text-xl font-semibold text-orange-500 mb-4">
             Statistik Hari Ini
           </h3>
           <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {[
+              { label: "Pemesanan", value: "1.284", icon: Ticket },
+              { label: "Tiket Hari Ini", value: "89", icon: CalendarCheck },
+              { label: "Rating", value: "4.8 / 5", icon: Star },
+              { label: "Ikan Terbesar", value: "12.6 kg", icon: Fish },
+              { label: "Penyedia Aktif", value: "18", icon: Users },
+              { label: "Kolam Aktif", value: "42", icon: MapPin },
+              { label: "Permintaan Baru", value: "3", icon: ClipboardList },
               {
-                label: "Pemesanan",
-                value: "1.284",
-                icon: Ticket,
-              },
-              {
-                label: "Tiket Hari Ini",
-                value: "89",
-                icon: CalendarCheck,
-              },
-              {
-                label: "Rating",
-                value: "4.8 / 5",
-                icon: Star,
-              },
-              {
-                label: "Ikan Terbesar",
-                value: "12.6 kg",
-                icon: Fish,
+                label: "Statistik Mingguan",
+                value: "Naik 15%",
+                icon: BarChart2,
               },
             ].map((item, i) => (
               <div
@@ -75,6 +102,33 @@ export default function DashboardHome() {
           </div>
         </section>
 
+        {/* Section: Grafik */}
+        <section>
+          <h3 className="text-lg sm:text-xl font-semibold text-orange-500 mb-4">
+            Grafik Pemesanan (7 Hari Terakhir)
+          </h3>
+          <div className="bg-gray-800 p-5 rounded-xl shadow">
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                data={chartData}
+                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#4B5563" />
+                <XAxis dataKey="tanggal" stroke="#9CA3AF" />
+                <YAxis stroke="#9CA3AF" />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="jumlah"
+                  stroke="#F97316"
+                  strokeWidth={2}
+                  activeDot={{ r: 6 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </section>
+
         {/* Section: Shortcut Fitur */}
         <section>
           <h3 className="text-lg sm:text-xl font-semibold text-orange-500 mb-4">
@@ -82,21 +136,9 @@ export default function DashboardHome() {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
             {[
-              {
-                label: "Buat Tiket Baru",
-                icon: PlusCircle,
-                href: "#",
-              },
-              {
-                label: "Data Pemesanan",
-                icon: ClipboardList,
-                href: "#",
-              },
-              {
-                label: "Manajemen Pengunjung",
-                icon: Users,
-                href: "#",
-              },
+              { label: "Buat Tiket Baru", icon: PlusCircle, href: "#" },
+              { label: "Data Pemesanan", icon: ClipboardList, href: "#" },
+              { label: "Manajemen Pengunjung", icon: Users, href: "#" },
             ].map((item, i) => (
               <a
                 key={i}
