@@ -1,30 +1,43 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getProfil } from "../../../services/profileService";
+import EditProfileForm from "../../../components/EditProfileForm";
 
 export default function UserProfile() {
-  const [user, setUser] = useState({
-    name: "Budi Santoso",
-    email: "budi@example.com",
-    phone: "+62 812 3456 7890",
-    membership: "Premium",
-    photo: "/images/user-avatar.png",
-    orders: [
-      { id: 1, date: "2025-07-10", spot: "PondZone A", status: "Selesai" },
-      { id: 2, date: "2025-06-28", spot: "PondZone B", status: "Batal" },
-    ],
-  });
+  const [user, setUser] = useState(null);
+  const [showEdit, setShowEdit] = useState(false);
 
-  const [imageSrc, setImageSrc] = useState(
-    user.photo || "/images/background.jpg"
-  );
+  const [imageSrc, setImageSrc] = useState("/images/background.jpg");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getProfil();
+        setUser(data);
+        setImageSrc(data.photo_profil || "/images/background.jpg");
+      } catch (error) {
+        console.error("Gagal memuat profil", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!user) {
+    return (
+      <section className="w-full min-h-screen flex items-center justify-center bg-white">
+        <p className="text-gray-600">Memuat profil...</p>
+      </section>
+    );
+  }
+
   return (
     <section className="w-full min-h-screen pt-38 pb-16 bg-white px-4">
       <div className="max-w-4xl mx-auto py-10 px-6 bg-white rounded-xl shadow-lg">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
           <div className="relative">
             <Image
-              src={imageSrc}
+              src={user.profile.photo_profil}
               alt="Foto Profil Pengguna"
               width={150}
               height={150}
@@ -40,16 +53,25 @@ export default function UserProfile() {
             </button>
           </div>
           <div className="flex flex-col gap-2 w-full">
-            <h1 className="text-2xl font-bold text-gray-800">{user.name}</h1>
-            <p className="text-gray-600">{user.email}</p>
-            <p className="text-gray-600">📞 {user.phone}</p>
+            <h1 className="text-2xl font-bold text-gray-800">
+              {user.user.name}
+            </h1>
+            <p className="text-gray-600">{user.user.email}</p>
+            <p className="text-gray-600">
+              📞 {user.profile?.no_telp || "Belum diisi"}
+            </p>
             <span className="inline-block mt-2 px-3 py-1 bg-green-100 text-green-800 rounded-full w-fit text-sm">
-              Member: {user.membership}
+              Member: {user.profile?.membership || "Gratis"}
             </span>
+
             <div className="mt-4 flex gap-3 flex-wrap">
-              <button className="px-4 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600">
+              <button
+                onClick={() => setShowEdit(true)}
+                className="px-4 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              >
                 Edit Profil
               </button>
+
               <button className="px-4 py-2 text-sm bg-gray-300 text-black rounded-md hover:bg-gray-400">
                 Ganti Password
               </button>
@@ -59,12 +81,30 @@ export default function UserProfile() {
             </div>
           </div>
         </div>
+        {showEdit && (
+          <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/10 shadow-xl">
+            <button
+              onClick={() => setShowEdit(false)}
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+            >
+              ✕
+            </button>
+            <EditProfileForm
+              user={user}
+              onClose={() => setShowEdit(false)}
+              onUpdate={(updatedUser) => {
+                setUser(updatedUser);
+                setShowEdit(false);
+              }}
+            />
+          </div>
+        )}
 
         <div className="mt-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             Riwayat Pemesanan
           </h2>
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
+          {/* <div className="bg-white shadow-md rounded-lg overflow-hidden">
             <table className="min-w-full text-left">
               <thead className="bg-gray-100 text-gray-600">
                 <tr>
@@ -93,7 +133,7 @@ export default function UserProfile() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
